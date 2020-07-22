@@ -1,0 +1,32 @@
+<div>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td>Imię</td>
+        <td>Nazwisko</td>
+        <td>Adres</td>
+        <td>Telefon</td>
+      </tr>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ users[i].firstname }}</td>
+        <td>{{ users[i].lastname }}</td>
+        <td>{{ users[i].adress }}</td>
+        <td>{{ users[i].phone }}</td>
+        <td><button>X</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <form #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
+    <label for="firstname">Imię</label>
+    <input type="text" name="firstname" id="firstname" ngModel><br>
+    <label for="lastname">Nazwisko</label>
+    <input type="text" name="lastname" id="lastname" ngModel><br>
+    <label for="adress">Adres</label>
+    <input type="text" name="adress" id="adress" ngModel><br>
+    <label for="phone">Numer telefonu</label>
+    <input type="text" name="phone" id="phone" ngModel><br>
+    <button type="submit">Dodaj</button>
+  </form>
+</div>
