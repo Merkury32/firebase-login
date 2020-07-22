@@ -1,1 +1,1 @@
-(See this project online)[https://merkury32.github.io/firebase-login/]
+[See this project online](https://merkury32.github.io/firebase-login/)
