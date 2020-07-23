@@ -14,12 +14,12 @@
           <div class="tableCell">{{ users[i].lastname }}</div>
           <div class="tableCell">{{ users[i].adress }}</div>
           <div class="tableCell">{{ users[i].phone }}</div>
-          <div class="tableCell"><button>X</button></div>
+          <div class="tableCell"><button (click)="onDelete(users[i].id)">X</button></div>
       </div>
     </div>
 </div>
 <div *ngIf="isClosed === false">
-  <form #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
+  <form #userEditForm="ngForm" (ngSubmit)="onAdd(userEditForm)">
     <label for="firstname">Imię</label>
     <input type="text" name="firstname" id="firstname" ngModel><br>
     <label for="lastname">Nazwisko</label>
@@ -28,7 +28,7 @@
     <input type="text" name="adress" id="adress" ngModel><br>
     <label for="phone">Numer telefonu</label>
     <input type="text" name="phone" id="phone" ngModel><br>
-    <button type="submit" (click)="onClose()">Dodaj</button>
-    <button (click)="onClose()">Anuluj</button>
+    <button type="submit">Dodaj</button>
+    <button type="button" (click)="onClose()">Anuluj</button>
   </form>
 </div>

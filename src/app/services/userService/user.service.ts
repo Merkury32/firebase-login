@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class UserService {
+
   constructor() {}
 
   fetchUsers(){
@@ -17,6 +18,11 @@ export class UserService {
     ])
   }
 
-  addUser() {
+  addUser(user: User) {
+    console.log(user);
+    return of(user)
+  }
+
+  deleteUser() {
   }
 }

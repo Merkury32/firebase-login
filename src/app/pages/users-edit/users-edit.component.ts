@@ -14,17 +14,27 @@ export class UsersEditComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
+
   ngOnInit(): void {
     this.userService.fetchUsers().subscribe(users => {
       this.users = users;
     })
   }
 
-  onSubmit(form: NgForm) {
-    const newUser = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: Math.random()});
+  onAdd(form: NgForm) {
+    this.isClosed = !this.isClosed;
+    const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '5'})
+    this.userService.addUser(user).subscribe(users => {
+      this.users.push(user)
+    })
+  }
+
+  onDelete(id: number) {
+
   }
 
   onClose() {
     this.isClosed = !this.isClosed;
   }
+
 }
