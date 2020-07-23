@@ -1,22 +1,22 @@
 <div>
   <button (click)="onClose()">Dodaj użytkownika</button>
-  <table border="1">
-    <tbody>
-      <tr>
-        <td>Imię</td>
-        <td>Nazwisko</td>
-        <td>Adres</td>
-        <td>Telefon</td>
-      </tr>
-      <tr *ngFor="let user of users; let i = index">
-        <td>{{ users[i].firstname }}</td>
-        <td>{{ users[i].lastname }}</td>
-        <td>{{ users[i].adress }}</td>
-        <td>{{ users[i].phone }}</td>
-        <td><button>X</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table">
+    <div class="tableBody">
+      <div class="tableRow">
+        <div class="tableCell">Imię</div>
+        <div class="tableCell">Nazwisko</div>
+        <div class="tableCell">Adres</div>
+        <div class="tableCell">Telefon</div>
+        <div class="tableCell"></div>
+      </div>
+      <div class="tableRow" *ngFor="let user of users; let i = index">
+          <div class="tableCell">{{ users[i].firstname }}</div>
+          <div class="tableCell">{{ users[i].lastname }}</div>
+          <div class="tableCell">{{ users[i].adress }}</div>
+          <div class="tableCell">{{ users[i].phone }}</div>
+          <div class="tableCell"><button>X</button></div>
+      </div>
+    </div>
 </div>
 <div *ngIf="isClosed === false">
   <form #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
