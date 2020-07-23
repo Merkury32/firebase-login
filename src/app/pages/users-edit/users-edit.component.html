@@ -14,7 +14,7 @@
           <div class="tableCell">{{ users[i].lastname }}</div>
           <div class="tableCell">{{ users[i].adress }}</div>
           <div class="tableCell">{{ users[i].phone }}</div>
-          <div class="tableCell"><button (click)="onDelete(users[i].id)">X</button></div>
+          <div class="tableCell"><button (click)="onDelete(i)">X</button></div>
       </div>
     </div>
 </div>

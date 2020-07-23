@@ -23,14 +23,16 @@ export class UsersEditComponent implements OnInit {
 
   onAdd(form: NgForm) {
     this.isClosed = !this.isClosed;
-    const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '5'})
+    const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4'})
     this.userService.addUser(user).subscribe(users => {
       this.users.push(user)
     })
   }
 
-  onDelete(id: number) {
-
+  onDelete(userID: number) {
+    this.userService.deleteUser(userID).subscribe(users => {
+      this.users.splice(userID, 1);
+    })
   }
 
   onClose() {
