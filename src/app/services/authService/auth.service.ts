@@ -10,6 +10,8 @@ export class AuthService {
   constructor() { }
 
   onLogin() {
-
+    return of([
+      new User({firstname: 'Jan', lastname: 'Kowalski', adress: 'Łódź, rzeczna 15', phone: '+48654435675'})
+    ])
   }
 }

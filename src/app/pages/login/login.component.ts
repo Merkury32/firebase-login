@@ -18,11 +18,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const email = form.value.email;
-    const password = form.value.password;
-
-    console.log(email, password);
-
+    this.authService.onLogin().subscribe(users => {
+      this.users = users;
+      console.log(users);
+    })
     this.router.navigate(['/edit']);
   }
 }
