@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class UsersEditComponent implements OnInit {
   users: User[];
+  isClosed = true;
 
   constructor(private userService: UserService) { }
 
@@ -21,5 +22,9 @@ export class UsersEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const newUser = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: Math.random()});
+  }
+
+  onClose() {
+    this.isClosed = !this.isClosed;
   }
 }

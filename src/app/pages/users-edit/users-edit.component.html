@@ -1,4 +1,5 @@
 <div>
+  <button (click)="onClose()">Dodaj użytkownika</button>
   <table border="1">
     <tbody>
       <tr>
@@ -17,7 +18,7 @@
     </tbody>
   </table>
 </div>
-<div>
+<div *ngIf="isClosed === false">
   <form #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
     <label for="firstname">Imię</label>
     <input type="text" name="firstname" id="firstname" ngModel><br>
@@ -28,5 +29,6 @@
     <label for="phone">Numer telefonu</label>
     <input type="text" name="phone" id="phone" ngModel><br>
     <button type="submit">Dodaj</button>
+    <button (click)="onClose()">Anuluj</button>
   </form>
 </div>
