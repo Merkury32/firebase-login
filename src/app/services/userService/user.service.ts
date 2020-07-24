@@ -6,25 +6,26 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class UserService {
+  usersArr = [];
 
   constructor() {}
 
   fetchUsers(){
-    return of([
-      new User({firstname: 'Jan', lastname: 'Kowalski', adress: 'Warszawa, miastowa 12a', phone: '+48754789345', id:'0'}),
-      new User({firstname: 'Magdalena', lastname: 'Nowak', adress: 'Poznań, miastowa 14', phone: '+48458542905', id:'1'}),
-      new User({firstname: 'Jan', lastname: 'Nowak', adress: 'Poznań, miastowa 14', phone: '+48485735274', id:'2'}),
-      new User({firstname: 'Adam', lastname: 'Kołodziej', adress: 'Warszawa, targowa 5', phone: '+48456439563', id:'3'}),
-    ])
+    let newUser = JSON.parse(sessionStorage.getItem('users'));
+    console.log(`fetchUsers ${newUser}`)
+    return of(newUser);
   }
 
   addUser(user: User) {
     console.log(`userService addUser: ${user}`);
-    return of(user);
+    this.usersArr.push(user);
+    sessionStorage.setItem('users', JSON.stringify(this.usersArr))
+    return of(this.fetchUsers());
   }
 
   deleteUser(id) {
     console.log(`userService deleteUser with id: ${id}`);
-    return of(id);
+    sessionStorage.removeItem('users')
+    return of();
   }
 }

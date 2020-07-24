@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  users: User[];
+  user: User[];
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.authService.onLogin().subscribe(users => {
-      this.users = users;
-      console.log(users);
+    this.authService.onLogin().subscribe(user => {
+      this.user = user;
+      console.log(user);
     })
     this.router.navigate(['/edit']);
   }

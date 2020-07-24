@@ -16,6 +16,10 @@ export class UsersEditComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.reloadTable();
+  }
+
+  reloadTable() {
     this.userService.fetchUsers().subscribe(users => {
       this.users = users;
     })
@@ -25,13 +29,13 @@ export class UsersEditComponent implements OnInit {
     this.isClosed = !this.isClosed;
     const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4'})
     this.userService.addUser(user).subscribe(users => {
-      this.users.push(user)
+      this.reloadTable();
     })
   }
 
   onDelete(userID: number) {
     this.userService.deleteUser(userID).subscribe(users => {
-      this.users.splice(userID, 1);
+      this.reloadTable();
     })
   }
 
