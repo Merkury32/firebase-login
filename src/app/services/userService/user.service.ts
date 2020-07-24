@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { User } from 'src/app/models/user.model';
 
 @Injectable({
@@ -12,10 +13,11 @@ export class UserService {
   fetchUsers() {
     let newUser = JSON.parse(sessionStorage.getItem('users'));
 
-    console.log('userService fetch users:');
-    console.log(newUser);
+    let mapUser = newUser.map(user => new User(user));
 
-    return of(newUser);
+    console.log('userService fetch users:', {mapUser});
+
+    return of(mapUser);
   }
 
   addUser(user: User) {
@@ -24,12 +26,11 @@ export class UserService {
 
     user.id = Math.random();
 
-    console.log('userService add user:');
-    console.log(user);
+    console.log('userService add user:', {user});
 
     usersArr.push(user);
     sessionStorage.setItem('users', JSON.stringify(usersArr));
-    return of(this.fetchUsers());
+    return of(user);
   }
 
   deleteUser(id) {
