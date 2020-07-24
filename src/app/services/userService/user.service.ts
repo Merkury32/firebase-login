@@ -3,29 +3,39 @@ import { of } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   usersArr = [];
 
   constructor() {}
 
-  fetchUsers(){
+  fetchUsers() {
     let newUser = JSON.parse(sessionStorage.getItem('users'));
-    console.log(`fetchUsers ${newUser}`)
+
+    console.log('userService fetch users:')
+    console.log(newUser);
+
     return of(newUser);
   }
 
   addUser(user: User) {
-    console.log(`userService addUser: ${user}`);
+    user.id = Math.random();
+
+    console.log('userService add user:')
+    console.log(user);
+
     this.usersArr.push(user);
-    sessionStorage.setItem('users', JSON.stringify(this.usersArr))
+    sessionStorage.setItem('users', JSON.stringify(this.usersArr));
     return of(this.fetchUsers());
   }
 
   deleteUser(id) {
     console.log(`userService deleteUser with id: ${id}`);
-    sessionStorage.removeItem('users')
-    return of();
+
+    this.usersArr = JSON.parse(sessionStorage.getItem('users'));
+    this.usersArr.splice(id, 1);
+    sessionStorage.setItem('users', JSON.stringify(this.usersArr));
+    return of(this.usersArr);
   }
 }
