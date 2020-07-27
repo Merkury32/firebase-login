@@ -8,6 +8,12 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserService {
 
+  public users: Array<User>;
+
+  get allUsers(): Array<User> {
+    return this.users;
+  }
+
   constructor() {}
 
   fetchUsers() {
