@@ -8,27 +8,25 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserService {
 
-  public users: Array<User>;
-
-  get allUsers(): Array<User> {
-    return this.users;
+  get allUsers(): User[] {
+    let usersArr = JSON.parse(sessionStorage.getItem('users'));
+    let mapUser = usersArr.map(user => new User(user));
+    return mapUser;
   }
 
   constructor() {}
 
   fetchUsers() {
-    let newUser = JSON.parse(sessionStorage.getItem('users'));
+    let usersArr = this.allUsers;
 
-    let mapUser = newUser.map(user => new User(user));
+    console.log('userService fetch users:', {usersArr});
 
-    console.log('userService fetch users:', {mapUser});
-
-    return of(mapUser);
+    return of(usersArr);
   }
 
   addUser(user: User) {
 
-    let usersArr = JSON.parse(sessionStorage.getItem('users')) || [];
+    let usersArr = this.allUsers;
 
     user.id = Math.random();
 
@@ -36,15 +34,18 @@ export class UserService {
 
     usersArr.push(user);
     sessionStorage.setItem('users', JSON.stringify(usersArr));
+
     return of(user);
   }
 
   deleteUser(id) {
     console.log(`userService deleteUser with id: ${id}`);
 
-    let deletedUser = JSON.parse(sessionStorage.getItem('users')) || [];
+    let deletedUser = this.allUsers;
+
     deletedUser.splice(id, 1);
     sessionStorage.setItem('users', JSON.stringify(deletedUser));
+
     return of(deletedUser);
   }
 }
