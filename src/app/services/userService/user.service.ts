@@ -8,17 +8,17 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserService {
   get allUsers(): User[] {
-    if (sessionStorage.getItem('users') === null) {
+    if (localStorage.getItem('users') === null) {
       return [];
-    } else if (sessionStorage.length > 0) {
-      let usersArr = JSON.parse(sessionStorage.getItem('users'));
+    } else if (localStorage.length > 0) {
+      let usersArr = JSON.parse(localStorage.getItem('users'));
       let mapUser = usersArr.map(user => new User(user));
       return mapUser;
     }
   }
 
   set allUsers(users: User[]) {
-    sessionStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('users', JSON.stringify(users));
   }
 
   constructor() {}
