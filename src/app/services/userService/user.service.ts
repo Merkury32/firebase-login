@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserService {
   get allUsers(): User[] {
-    if (sessionStorage.length === 0) {
+    if (sessionStorage.getItem('users') === null) {
       return [];
     } else if (sessionStorage.length > 0) {
       let usersArr = JSON.parse(sessionStorage.getItem('users'));
