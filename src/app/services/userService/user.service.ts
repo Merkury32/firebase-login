@@ -7,11 +7,18 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-
   get allUsers(): User[] {
-    let usersArr = JSON.parse(sessionStorage.getItem('users'));
-    let mapUser = usersArr.map(user => new User(user));
-    return mapUser;
+    if (sessionStorage.length === 0) {
+      return [];
+    } else if (sessionStorage.length > 0) {
+      let usersArr = JSON.parse(sessionStorage.getItem('users'));
+      let mapUser = usersArr.map(user => new User(user));
+      return mapUser;
+    }
+  }
+
+  set allUsers(users: User[]) {
+    sessionStorage.setItem('users', JSON.stringify(users));
   }
 
   constructor() {}
@@ -33,7 +40,8 @@ export class UserService {
     console.log('userService add user:', {user});
 
     usersArr.push(user);
-    sessionStorage.setItem('users', JSON.stringify(usersArr));
+
+    this.allUsers = usersArr;
 
     return of(user);
   }
@@ -44,7 +52,8 @@ export class UserService {
     let deletedUser = this.allUsers;
 
     deletedUser.splice(id, 1);
-    sessionStorage.setItem('users', JSON.stringify(deletedUser));
+
+    this.allUsers = deletedUser;
 
     return of(deletedUser);
   }
