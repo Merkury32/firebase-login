@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map, max } from 'rxjs/operators'
 import { User } from 'src/app/models/user.model';
 
 @Injectable({
@@ -26,8 +26,6 @@ export class UserService {
   fetchUsers() {
     let usersArr = this.allUsers;
 
-    console.log('userService fetch users:', {usersArr});
-
     return of(usersArr);
   }
 
@@ -35,9 +33,15 @@ export class UserService {
 
     let usersArr = this.allUsers;
 
-    user.id = Math.random();
+    let mapIds = usersArr.map(ids => ids.id);
 
-    console.log('userService add user:', {user});
+    let maxId = Math.max(...mapIds);
+
+    if (usersArr.length == 0) {
+      user.id = 0;
+    } else {
+      user.id = maxId + 1;
+    }
 
     usersArr.push(user);
 
@@ -47,7 +51,6 @@ export class UserService {
   }
 
   deleteUser(id) {
-    console.log(`userService deleteUser with id: ${id}`);
 
     let deletedUser = this.allUsers;
 
