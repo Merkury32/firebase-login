@@ -1,20 +1,146 @@
-.table{
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.table {
   display: table;
-  border: 1px solid #000000;
+  border: 1px solid #87b9be;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 1px 0 1px #aecdd0;
+  font-size: 17px;
 }
 
 .divTableBody {
-	display: table-row-group;
+  display: table-row-group;
 }
 
 .tableRow {
-	display: table-row;
+  &--even {
+    background: #ffffff;
+    display: table-row;
+  }
+
+  &--odd {
+    background: #daeff1;
+    display: table-row;
+  }
 }
 
 .tableCell {
-	border: 1px solid #000000;
-	display: table-cell;
-	padding: 3px 10px;
+  display: table-cell;
+  padding: 20px 20px;
+  color: #5c7d88;
+  font-weight: 500;
+
+  &--head {
+    display: table-cell;
+    padding: 5px 10px;
+    color: #5c7d88;
+    font-weight: 500;
+  }
 }
 
+.tableHead {
+  color: white;
+  background: #327a81;
+  padding: 10px 0;
+  font-size: 20px;
+  border-radius: 5px 5px 0px 0px;
+}
 
+.delete-button {
+  border: none;
+  background: #edf7f8;
+  padding: 5px 10px;
+  outline: none;
+
+  &:active {
+    background: #e2f7f8;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.add_user-button {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5c7d88;
+  background: #edf7f8;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 5px 5px 0px 0px;
+
+  &:active {
+    background: #e2f7f8;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.add_user-container {
+  margin-top: 2px;
+  background: #daeff1;
+  border-radius: 6px 0px 6px 6px;
+  width: 195px;
+  height: 240px;
+}
+
+.add_user-input {
+  margin-top: 5px;
+  margin-left: 10px;
+  outline: none;
+  background: #fafcfc;
+  border: 1px solid #c3d2d3;
+  border-radius: 2px;
+  height: 20px;
+}
+
+.add_user-label {
+  font-size: 15px;
+  margin-left: 12px;
+}
+
+.add_user-button {
+  &--add {
+    margin-left: 10px;
+    margin-top: 8px;
+    border: none;
+    outline: none;
+    background: #edf7f8;
+    padding: 5px;
+
+    &:active {
+      background: #e2f7f8;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--close {
+    margin-left: 4px;
+    margin-top: 8px;
+    border: none;
+    outline: none;
+    background: #edf7f8;
+    padding: 5px;
+
+    &:active {
+      background: #e2f7f8;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
