@@ -6,11 +6,11 @@
 
 .table {
   display: table;
-  border: 1px solid #87b9be;
+  border: 1px solid #327a81;
   border-radius: 5px;
   text-align: center;
   box-shadow: 0 1px 0 1px #aecdd0;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .divTableBody {
@@ -21,11 +21,14 @@
   &--even {
     background: #ffffff;
     display: table-row;
+    border: 0px;
+    border-radius: 4px;
   }
 
   &--odd {
     background: #daeff1;
     display: table-row;
+    border-radius: 4px;
   }
 }
 
@@ -48,12 +51,12 @@
   background: #327a81;
   padding: 10px 0;
   font-size: 20px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 4px 4px 0px 0px;
 }
 
 .delete-button {
   border: none;
-  background: #edf7f8;
+  background: #b2dfe2;
   padding: 5px 10px;
   outline: none;
 
@@ -72,7 +75,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #5c7d88;
-  background: #edf7f8;
+  background: #b2dfe2;
   padding: 5px;
   margin-left: 5px;
   border-radius: 5px 5px 0px 0px;
