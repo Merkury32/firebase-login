@@ -5,7 +5,7 @@
 }
 
 .table {
-  display: table;
+  display: flex;
   border: 1px solid #327a81;
   border-radius: 5px;
   text-align: center;
@@ -14,36 +14,36 @@
 }
 
 .divTableBody {
-  display: table-row-group;
+  display: flex;
 }
 
 .tableRow {
   &--even {
     background: #ffffff;
-    display: table-row;
+    display: flex;
     border: 0px;
-    border-radius: 4px;
   }
 
   &--odd {
     background: #daeff1;
-    display: table-row;
-    border-radius: 4px;
+    display: flex;
   }
+
 }
 
 .tableCell {
-  display: table-cell;
   padding: 20px 20px;
   color: #5c7d88;
   font-weight: 500;
+  flex: 1;
 
   &--head {
-    display: table-cell;
     padding: 5px 10px;
     color: #5c7d88;
     font-weight: 500;
+    flex: 1;
   }
+
 }
 
 .tableHead {
