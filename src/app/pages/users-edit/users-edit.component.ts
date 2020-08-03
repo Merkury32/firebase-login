@@ -10,7 +10,6 @@ import { NgForm } from '@angular/forms';
 })
 export class UsersEditComponent implements OnInit {
   users: User[];
-  isClosed = true;
 
   constructor(private userService: UserService) { }
 
@@ -26,7 +25,6 @@ export class UsersEditComponent implements OnInit {
   }
 
   onAdd(form: NgForm) {
-    this.isClosed = !this.isClosed;
     const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4'})
     this.userService.addUser(user).subscribe(users => {
       this.reloadTable();
@@ -38,9 +36,4 @@ export class UsersEditComponent implements OnInit {
       this.reloadTable();
     })
   }
-
-  onClose() {
-    this.isClosed = !this.isClosed;
-  }
-
 }
