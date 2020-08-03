@@ -1,15 +1,3 @@
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -777,27 +765,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onAdd",
         value: function onAdd(form) {
-          var _this3 = this;
-
           var user = new _models_user_model__WEBPACK_IMPORTED_MODULE_1__["User"]({
             firstname: form.value.firstname,
             lastname: form.value.lastname,
             adress: form.value.adress,
             phone: form.value.phone,
             id: '4'
-          });
-          this.userService.addUser(user).subscribe(function (users) {
-            _this3.reloadTable();
-          });
-          form.reset();
+          }); // this.userService.addUser(user).subscribe(users => {
+          //   this.reloadTable();
+          // })
+          // form.reset();
+
+          this.userService.addUser(user);
         }
       }, {
         key: "onDelete",
         value: function onDelete(userID) {
-          var _this4 = this;
+          var _this3 = this;
 
           this.userService.deleteUser(userID).subscribe(function (users) {
-            _this4.reloadTable();
+            _this3.reloadTable();
           });
         }
       }, {
@@ -1159,10 +1146,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! src/app/models/user.model */
     "./src/app/models/user.model.ts");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 
     var UserService = /*#__PURE__*/function () {
-      function UserService() {
+      function UserService(http) {
         _classCallCheck(this, UserService);
+
+        this.http = http;
       }
 
       _createClass(UserService, [{
@@ -1174,21 +1169,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "addUser",
         value: function addUser(user) {
-          var usersArr = this.allUsers;
-          var mapIds = usersArr.map(function (ids) {
-            return ids.id;
+          // let usersArr = this.allUsers;
+          // let mapIds = usersArr.map(ids => ids.id);
+          // let maxId = Math.max(...mapIds);
+          // if (usersArr.length == 0) {
+          //   user.id = 0;
+          // } else {
+          //   user.id = maxId + 1;
+          // }
+          // usersArr.push(user);
+          // this.allUsers = usersArr;
+          // return of(user);
+          var postData = user;
+          this.http.post("https://fir-login-1416c.firebaseio.com/posts.json", postData, {
+            observe: "response"
+          }).subscribe(function (responseData) {
+            console.log(responseData.body);
+          }, function (error) {
+            console.log(error);
           });
-          var maxId = Math.max.apply(Math, _toConsumableArray(mapIds));
-
-          if (usersArr.length == 0) {
-            user.id = 0;
-          } else {
-            user.id = maxId + 1;
-          }
-
-          usersArr.push(user);
-          this.allUsers = usersArr;
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(user);
         }
       }, {
         key: "deleteUser",
@@ -1220,7 +1219,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     UserService.ɵfac = function UserService_Factory(t) {
-      return new (t || UserService)();
+      return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]));
     };
 
     UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -1237,7 +1236,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           providedIn: 'root'
         }]
       }], function () {
-        return [];
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]
+        }];
       }, null);
     })();
     /***/

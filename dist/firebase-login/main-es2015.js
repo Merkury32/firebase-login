@@ -386,10 +386,11 @@ class UsersEditComponent {
     }
     onAdd(form) {
         const user = new _models_user_model__WEBPACK_IMPORTED_MODULE_1__["User"]({ firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4' });
-        this.userService.addUser(user).subscribe(users => {
-            this.reloadTable();
-        });
-        form.reset();
+        // this.userService.addUser(user).subscribe(users => {
+        //   this.reloadTable();
+        // })
+        // form.reset();
+        this.userService.addUser(user);
     }
     onDelete(userID) {
         this.userService.deleteUser(userID).subscribe(users => {
@@ -556,12 +557,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/user.model */ "./src/app/models/user.model.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
 
 
 
 
 class UserService {
-    constructor() { }
+    constructor(http) {
+        this.http = http;
+    }
     get allUsers() {
         if (localStorage.getItem('users') === null) {
             return [];
@@ -580,18 +585,26 @@ class UserService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersArr);
     }
     addUser(user) {
-        let usersArr = this.allUsers;
-        let mapIds = usersArr.map(ids => ids.id);
-        let maxId = Math.max(...mapIds);
-        if (usersArr.length == 0) {
-            user.id = 0;
-        }
-        else {
-            user.id = maxId + 1;
-        }
-        usersArr.push(user);
-        this.allUsers = usersArr;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(user);
+        // let usersArr = this.allUsers;
+        // let mapIds = usersArr.map(ids => ids.id);
+        // let maxId = Math.max(...mapIds);
+        // if (usersArr.length == 0) {
+        //   user.id = 0;
+        // } else {
+        //   user.id = maxId + 1;
+        // }
+        // usersArr.push(user);
+        // this.allUsers = usersArr;
+        // return of(user);
+        const postData = user;
+        this.http
+            .post("https://fir-login-1416c.firebaseio.com/posts.json", postData, {
+            observe: "response",
+        }).subscribe((responseData) => {
+            console.log(responseData.body);
+        }, (error) => {
+            console.log(error);
+        });
     }
     deleteUser(id) {
         let deletedUser = this.allUsers;
@@ -600,14 +613,14 @@ class UserService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(deletedUser);
     }
 }
-UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(); };
+UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
 UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root',
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
