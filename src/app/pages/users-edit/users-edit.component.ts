@@ -33,10 +33,11 @@ export class UsersEditComponent implements OnInit {
 
   onAdd(form: NgForm) {
     const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4'})
-    this.userService.addUser(user).subscribe(users => {
-      this.reloadTable();
-    })
-    form.reset();
+    // this.userService.addUser(user).subscribe(users => {
+    //   this.reloadTable();
+    // })
+    // form.reset();
+    this.userService.addUser(user);
   }
 
   onDelete(userID: number) {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, max } from 'rxjs/operators'
 import { User } from 'src/app/models/user.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class UserService {
     localStorage.setItem('users', JSON.stringify(users));
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   fetchUsers() {
     let usersArr = this.allUsers;
@@ -31,23 +32,40 @@ export class UserService {
 
   addUser(user: User) {
 
-    let usersArr = this.allUsers;
+    // let usersArr = this.allUsers;
 
-    let mapIds = usersArr.map(ids => ids.id);
+    // let mapIds = usersArr.map(ids => ids.id);
 
-    let maxId = Math.max(...mapIds);
+    // let maxId = Math.max(...mapIds);
 
-    if (usersArr.length == 0) {
-      user.id = 0;
-    } else {
-      user.id = maxId + 1;
-    }
+    // if (usersArr.length == 0) {
+    //   user.id = 0;
+    // } else {
+    //   user.id = maxId + 1;
+    // }
 
-    usersArr.push(user);
+    // usersArr.push(user);
 
-    this.allUsers = usersArr;
+    // this.allUsers = usersArr;
 
-    return of(user);
+    // return of(user);
+
+    const postData: User = user;
+    this.http
+      .post<{ name: string }>(
+        "https://fir-login-1416c.firebaseio.com/posts.json",
+        postData,
+        {
+          observe: "response",
+        }
+      ).subscribe(
+        (responseData) => {
+          console.log(responseData.body);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   deleteUser(id) {
