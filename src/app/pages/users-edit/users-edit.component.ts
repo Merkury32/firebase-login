@@ -37,4 +37,8 @@ export class UsersEditComponent implements OnInit {
       this.reloadTable();
     })
   }
+
+  onClear(form: NgForm) {
+    form.reset();
+  }
 }

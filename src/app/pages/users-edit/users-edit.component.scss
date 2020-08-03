@@ -146,4 +146,21 @@
       cursor: pointer;
     }
   }
+
+  &--clear {
+    margin-left: 4px;
+    margin-top: 8px;
+    border: none;
+    outline: none;
+    background: #edf7f8;
+    padding: 5px;
+
+    &:active {
+      background: #e2f7f8;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
