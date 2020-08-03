@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/userService/user.service';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
+import { AddUserPopupComponent } from './add-user-popup/add-user-popup.component';
 
 @Component({
   selector: 'app-users-edit',
@@ -10,6 +11,8 @@ import { NgForm } from '@angular/forms';
 })
 export class UsersEditComponent implements OnInit {
   users: User[];
+
+  @ViewChild(AddUserPopupComponent) userPopup:AddUserPopupComponent;
 
   constructor(private userService: UserService) { }
 
@@ -25,7 +28,7 @@ export class UsersEditComponent implements OnInit {
   }
 
   toggle(className) {
-    document.querySelector(className).classList.toggle('hide');
+    this.userPopup.toggle(className);
   }
 
   onAdd(form: NgForm) {
