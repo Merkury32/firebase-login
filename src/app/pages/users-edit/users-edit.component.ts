@@ -29,6 +29,7 @@ export class UsersEditComponent implements OnInit {
     this.userService.addUser(user).subscribe(users => {
       this.reloadTable();
     })
+    form.reset();
   }
 
   onDelete(userID: number) {
