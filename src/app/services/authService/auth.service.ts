@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { User } from 'src/app/models/user.model';
+import { HttpClient } from "@angular/common/http";
+import { UserLogin } from 'src/app/models/user-login.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  onLogin() {
-    return of([
-      new User({firstname: 'Jan', lastname: 'Kowalski', adress: 'Łódź, rzeczna 15', phone: '+48654435675'})
-    ])
+  onLogin(email: string, password: string) {
+    return this.http
+      .post<UserLogin>(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + environment.firebaseApiKey,
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
   }
 }

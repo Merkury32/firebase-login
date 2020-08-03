@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UsersEditComponent } from './pages/users-edit/users-edit.component';
 import { FormsModule } from '@angular/forms';
 import { AddUserPopupComponent } from './pages/users-edit/add-user-popup/add-user-popup.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddUserPopupComponent } from './pages/users-edit/add-user-popup/add-use
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
