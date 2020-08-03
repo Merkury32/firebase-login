@@ -10,7 +10,9 @@ export class AddUserPopupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    window.t = q => document.querySelector(q).classList.toggle('hide');
   }
 
+  toggle(className) {
+    document.querySelector(className).classList.toggle('hide');
+  }
 }

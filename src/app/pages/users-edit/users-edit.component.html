@@ -1,6 +1,6 @@
 <div class="table-container">
   <div>
-    <button onclick="t('.popupBg')" class="add_user-button">Dodaj użytkownika</button>
+    <button (click)="toggle('.popupBg')" class="add_user-button">Dodaj użytkownika</button>
     <div class="table">
       <div class="tableBody">
         <div class="tableHead">Użytkownicy</div>
@@ -31,9 +31,9 @@
         <input type="text" name="adress" id="adress" ngModel class="add_user-input"><br>
         <label for="phone" class="add_user-label">Numer telefonu</label><br>
         <input type="text" name="phone" id="phone" ngModel class="add_user-input"><br>
-        <button type="submit" class="add_user-button--add" onclick="t('.popupBg')">Dodaj</button>
+        <button type="submit" class="add_user-button--add" (click)="toggle('.popupBg')">Dodaj</button>
         <button type="button" class="add_user-button--clear" (click)="onClear(userEditForm)">Wyczyść</button>
-        <button type="button" class="add_user-button--close" onclick="t('.popupBg')">Anuluj</button>
+        <button type="button" class="add_user-button--close" (click)="toggle('.popupBg')">Anuluj</button>
       </form>
     </div>
 </add-user-popup>

@@ -24,6 +24,10 @@ export class UsersEditComponent implements OnInit {
     })
   }
 
+  toggle(className) {
+    document.querySelector(className).classList.toggle('hide');
+  }
+
   onAdd(form: NgForm) {
     const user = new User({firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4'})
     this.userService.addUser(user).subscribe(users => {
