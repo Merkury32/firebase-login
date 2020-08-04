@@ -30,9 +30,13 @@ export class UserService {
     // return of(usersArr);
 
     this.http
-      .get('https://fir-login-1416c.firebaseio.com/users.json')
+      .get<User[]>('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
-        console.log(users);
+        let arr = Object.keys(users).map((key) => ({
+          type: key,
+          value: users[key],
+        }));
+        return of(arr);
       });
   }
 
