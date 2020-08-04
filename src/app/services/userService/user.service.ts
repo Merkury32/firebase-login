@@ -28,16 +28,21 @@ export class UserService {
     // let usersArr = this.allUsers;
 
     // return of(usersArr);
-
+    let usersAr: User[] = [];
     this.http
-      .get<User[]>('https://fir-login-1416c.firebaseio.com/users.json')
+      .get('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
         let arr = Object.keys(users).map((key) => ({
           type: key,
           value: users[key],
         }));
-        return of(arr);
+        let arrMap = arr.map((user) => new User(user));
+        for (let i = 0; i < arrMap.length; i++) {
+          usersAr.push(arrMap[i]);
+        }
       });
+    console.log(usersAr);
+    return of(usersAr);
   }
 
   addUser(user: User) {
@@ -76,6 +81,8 @@ export class UserService {
           console.log(error);
         }
       );
+
+    this.fetchUsers();
   }
 
   deleteUser(id) {

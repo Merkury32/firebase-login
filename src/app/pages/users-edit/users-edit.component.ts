@@ -21,7 +21,9 @@ export class UsersEditComponent implements OnInit {
   }
 
   reloadTable() {
-    this.userService.fetchUsers();
+    this.userService.fetchUsers().subscribe((user) => {
+      this.users = user;
+    });
   }
 
   toggle(className) {
@@ -43,6 +45,8 @@ export class UsersEditComponent implements OnInit {
     // this.userService.addUser(user).subscribe((users) => {
     //   this.users = users;
     // });
+
+    this.userService.addUser(user);
     this.reloadTable();
   }
 
