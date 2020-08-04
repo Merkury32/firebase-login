@@ -751,11 +751,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "reloadTable",
         value: function reloadTable() {
-          var _this2 = this;
-
-          this.userService.fetchUsers().subscribe(function (users) {
-            _this2.users = users;
-          });
+          this.userService.fetchUsers();
         }
       }, {
         key: "toggle",
@@ -775,16 +771,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           //   this.reloadTable();
           // })
           // form.reset();
+          // this.userService.addUser(user).subscribe((users) => {
+          //   this.users = users;
+          // });
 
-          this.userService.addUser(user);
+          this.reloadTable();
         }
       }, {
         key: "onDelete",
         value: function onDelete(userID) {
-          var _this3 = this;
+          var _this2 = this;
 
           this.userService.deleteUser(userID).subscribe(function (users) {
-            _this3.reloadTable();
+            _this2.reloadTable();
           });
         }
       }, {
@@ -1163,8 +1162,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UserService, [{
         key: "fetchUsers",
         value: function fetchUsers() {
-          var usersArr = this.allUsers;
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersArr);
+          // let usersArr = this.allUsers;
+          // return of(usersArr);
+          this.http.get('https://fir-login-1416c.firebaseio.com/users.json').subscribe(function (users) {
+            var arr = Object.keys(users).map(function (key) {
+              return {
+                type: key,
+                value: users[key]
+              };
+            });
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(arr);
+          });
         }
       }, {
         key: "addUser",
@@ -1181,8 +1189,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // this.allUsers = usersArr;
           // return of(user);
           var postData = user;
-          this.http.post("https://fir-login-1416c.firebaseio.com/posts.json", postData, {
-            observe: "response"
+          this.http.post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
+            observe: 'response'
           }).subscribe(function (responseData) {
             console.log(responseData.body);
           }, function (error) {

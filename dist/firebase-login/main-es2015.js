@@ -377,23 +377,30 @@ class UsersEditComponent {
         this.reloadTable();
     }
     reloadTable() {
-        this.userService.fetchUsers().subscribe(users => {
-            this.users = users;
-        });
+        this.userService.fetchUsers();
     }
     toggle(className) {
         this.userPopup.toggle(className);
     }
     onAdd(form) {
-        const user = new _models_user_model__WEBPACK_IMPORTED_MODULE_1__["User"]({ firstname: form.value.firstname, lastname: form.value.lastname, adress: form.value.adress, phone: form.value.phone, id: '4' });
+        const user = new _models_user_model__WEBPACK_IMPORTED_MODULE_1__["User"]({
+            firstname: form.value.firstname,
+            lastname: form.value.lastname,
+            adress: form.value.adress,
+            phone: form.value.phone,
+            id: '4',
+        });
         // this.userService.addUser(user).subscribe(users => {
         //   this.reloadTable();
         // })
         // form.reset();
-        this.userService.addUser(user);
+        // this.userService.addUser(user).subscribe((users) => {
+        //   this.users = users;
+        // });
+        this.reloadTable();
     }
     onDelete(userID) {
-        this.userService.deleteUser(userID).subscribe(users => {
+        this.userService.deleteUser(userID).subscribe((users) => {
             this.reloadTable();
         });
     }
@@ -492,7 +499,7 @@ UsersEditComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         args: [{
                 selector: 'app-users-edit',
                 templateUrl: './users-edit.component.html',
-                styleUrls: ['./users-edit.component.scss']
+                styleUrls: ['./users-edit.component.scss'],
             }]
     }], function () { return [{ type: _services_userService_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] }]; }, { userPopup: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
@@ -573,7 +580,7 @@ class UserService {
         }
         else if (localStorage.length > 0) {
             let usersArr = JSON.parse(localStorage.getItem('users'));
-            let mapUser = usersArr.map(user => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
+            let mapUser = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
             return mapUser;
         }
     }
@@ -581,8 +588,17 @@ class UserService {
         localStorage.setItem('users', JSON.stringify(users));
     }
     fetchUsers() {
-        let usersArr = this.allUsers;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersArr);
+        // let usersArr = this.allUsers;
+        // return of(usersArr);
+        this.http
+            .get('https://fir-login-1416c.firebaseio.com/users.json')
+            .subscribe((users) => {
+            let arr = Object.keys(users).map((key) => ({
+                type: key,
+                value: users[key],
+            }));
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(arr);
+        });
     }
     addUser(user) {
         // let usersArr = this.allUsers;
@@ -598,9 +614,10 @@ class UserService {
         // return of(user);
         const postData = user;
         this.http
-            .post("https://fir-login-1416c.firebaseio.com/posts.json", postData, {
-            observe: "response",
-        }).subscribe((responseData) => {
+            .post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
+            observe: 'response',
+        })
+            .subscribe((responseData) => {
             console.log(responseData.body);
         }, (error) => {
             console.log(error);

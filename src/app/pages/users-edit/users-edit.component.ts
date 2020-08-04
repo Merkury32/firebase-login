@@ -40,9 +40,9 @@ export class UsersEditComponent implements OnInit {
     //   this.reloadTable();
     // })
     // form.reset();
-    this.userService.addUser(user).subscribe((users) => {
-      this.users = users;
-    });
+    // this.userService.addUser(user).subscribe((users) => {
+    //   this.users = users;
+    // });
     this.reloadTable();
   }
 
