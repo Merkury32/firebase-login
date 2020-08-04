@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map, max } from 'rxjs/operators'
+import { map, max } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ export class UserService {
       return [];
     } else if (localStorage.length > 0) {
       let usersArr = JSON.parse(localStorage.getItem('users'));
-      let mapUser = usersArr.map(user => new User(user));
+      let mapUser = usersArr.map((user) => new User(user));
       return mapUser;
     }
   }
@@ -25,13 +25,18 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   fetchUsers() {
-    let usersArr = this.allUsers;
+    // let usersArr = this.allUsers;
 
-    return of(usersArr);
+    // return of(usersArr);
+
+    this.http
+      .get('https://fir-login-1416c.firebaseio.com/users.json')
+      .subscribe((users) => {
+        console.log(users);
+      });
   }
 
   addUser(user: User) {
-
     // let usersArr = this.allUsers;
 
     // let mapIds = usersArr.map(ids => ids.id);
@@ -53,12 +58,13 @@ export class UserService {
     const postData: User = user;
     this.http
       .post<{ name: string }>(
-        "https://fir-login-1416c.firebaseio.com/posts.json",
+        'https://fir-login-1416c.firebaseio.com/users.json',
         postData,
         {
-          observe: "response",
+          observe: 'response',
         }
-      ).subscribe(
+      )
+      .subscribe(
         (responseData) => {
           console.log(responseData.body);
         },
@@ -69,7 +75,6 @@ export class UserService {
   }
 
   deleteUser(id) {
-
     let deletedUser = this.allUsers;
 
     deletedUser.splice(id, 1);
