@@ -28,7 +28,6 @@
     background: #daeff1;
     display: flex;
   }
-
 }
 
 .tableCell {
@@ -43,7 +42,6 @@
     font-weight: 500;
     flex: 1;
   }
-
 }
 
 .tableHead {
@@ -162,5 +160,21 @@
     &:hover {
       cursor: pointer;
     }
+  }
+}
+
+.logout-button {
+  position: absolute;
+  background: #e2f7f8;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  top: 0px;
+  right: 0px;
+
+  &:active {
+    background: #bff8fa;
   }
 }
