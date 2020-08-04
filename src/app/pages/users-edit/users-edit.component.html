@@ -20,10 +20,10 @@
           [ngClass]="this.i % 2 == 0 ? 'tableRow--even' : 'tableRow--odd'"
           *ngFor="let user of users; let i = index"
         >
-          <div class="tableCell">{{ users[i].firstname }}</div>
-          <div class="tableCell">{{ users[i].lastname }}</div>
-          <div class="tableCell">{{ users[i].adress }}</div>
-          <div class="tableCell">{{ users[i].phone }}</div>
+          <div class="tableCell">{{ users[i].value.firstname }}</div>
+          <div class="tableCell">{{ users[i].value.lastname }}</div>
+          <div class="tableCell">{{ users[i].value.adress }}</div>
+          <div class="tableCell">{{ users[i].value.phone }}</div>
           <div class="tableCell">
             <button (click)="onDelete(i)" class="delete-button">X</button>
           </div>
