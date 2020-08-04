@@ -3,6 +3,7 @@ import { UserService } from '../../services/userService/user.service';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
 import { AddUserPopupComponent } from './add-user-popup/add-user-popup.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-edit',
@@ -14,7 +15,7 @@ export class UsersEditComponent implements OnInit {
 
   @ViewChild(AddUserPopupComponent) userPopup: AddUserPopupComponent;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.reloadTable();
@@ -58,5 +59,9 @@ export class UsersEditComponent implements OnInit {
 
   onClear(form: NgForm) {
     form.reset();
+  }
+
+  onLogout() {
+    this.router.navigate(['./']);
   }
 }
