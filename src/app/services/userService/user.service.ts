@@ -28,6 +28,7 @@ export class UserService {
     // let usersArr = this.allUsers;
 
     // return of(usersArr);
+    let usersAr: User[] = [];
     this.http
       .get('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
@@ -36,9 +37,11 @@ export class UserService {
           return user;
         });
         let arrMap = usersArr.map((user) => new User(user));
-        console.log(arrMap);
+        for (let i = 0; i < arrMap.length; i++) {
+          usersAr.push(arrMap[i]);
+        }
       });
-    return of([]);
+    return of(usersAr);
   }
 
   addUser(user: User) {
