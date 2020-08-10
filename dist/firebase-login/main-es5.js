@@ -1224,39 +1224,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function fetchUsers() {
           // let usersArr = this.allUsers;
           // return of(usersArr);
-          var usersAr = [];
           this.http.get('https://fir-login-1416c.firebaseio.com/users.json').subscribe(function (users) {
-            var arr = Object.keys(users).map(function (key) {
-              return {
-                type: key,
-                value: users[key]
-              };
+            var usersArr = Object.keys(users).map(function (id) {
+              var user = users[id];
+              return user;
             });
-            var arrMap = arr.map(function (user) {
+            var arrMap = usersArr.map(function (user) {
               return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
             });
-
-            for (var i = 0; i < arrMap.length; i++) {
-              usersAr.push(arrMap[i]);
-            }
+            console.log(arrMap);
           });
-          console.log(usersAr);
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([]);
         }
       }, {
         key: "addUser",
         value: function addUser(user) {
-          // let usersArr = this.allUsers;
-          // let mapIds = usersArr.map(ids => ids.id);
-          // let maxId = Math.max(...mapIds);
-          // if (usersArr.length == 0) {
-          //   user.id = 0;
-          // } else {
-          //   user.id = maxId + 1;
-          // }
-          // usersArr.push(user);
-          // this.allUsers = usersArr;
-          // return of(user);
           var postData = user;
           this.http.post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
             observe: 'response'
