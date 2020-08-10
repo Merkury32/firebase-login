@@ -616,6 +616,7 @@ class UserService {
     fetchUsers() {
         // let usersArr = this.allUsers;
         // return of(usersArr);
+        let usersAr = [];
         this.http
             .get('https://fir-login-1416c.firebaseio.com/users.json')
             .subscribe((users) => {
@@ -624,9 +625,11 @@ class UserService {
                 return user;
             });
             let arrMap = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
-            console.log(arrMap);
+            for (let i = 0; i < arrMap.length; i++) {
+                usersAr.push(arrMap[i]);
+            }
         });
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([]);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
     }
     addUser(user) {
         const postData = user;

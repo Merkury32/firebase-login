@@ -1224,6 +1224,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function fetchUsers() {
           // let usersArr = this.allUsers;
           // return of(usersArr);
+          var usersAr = [];
           this.http.get('https://fir-login-1416c.firebaseio.com/users.json').subscribe(function (users) {
             var usersArr = Object.keys(users).map(function (id) {
               var user = users[id];
@@ -1232,9 +1233,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var arrMap = usersArr.map(function (user) {
               return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
             });
-            console.log(arrMap);
+
+            for (var i = 0; i < arrMap.length; i++) {
+              usersAr.push(arrMap[i]);
+            }
           });
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([]);
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
         }
       }, {
         key: "addUser",
