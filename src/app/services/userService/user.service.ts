@@ -28,42 +28,20 @@ export class UserService {
     // let usersArr = this.allUsers;
 
     // return of(usersArr);
-    let usersAr: User[] = [];
     this.http
       .get('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
-        let arr = Object.keys(users).map((key) => ({
-          type: key,
-          value: users[key],
-        }));
-        let arrMap = arr.map((user) => new User(user));
-        for (let i = 0; i < arrMap.length; i++) {
-          usersAr.push(arrMap[i]);
-        }
+        let usersArr = Object.keys(users).map(function (id) {
+          let user = users[id];
+          return user;
+        });
+        let arrMap = usersArr.map((user) => new User(user));
+        console.log(arrMap);
       });
-    console.log(usersAr);
-    return of(usersAr);
+    return of([]);
   }
 
   addUser(user: User) {
-    // let usersArr = this.allUsers;
-
-    // let mapIds = usersArr.map(ids => ids.id);
-
-    // let maxId = Math.max(...mapIds);
-
-    // if (usersArr.length == 0) {
-    //   user.id = 0;
-    // } else {
-    //   user.id = maxId + 1;
-    // }
-
-    // usersArr.push(user);
-
-    // this.allUsers = usersArr;
-
-    // return of(user);
-
     const postData: User = user;
     this.http
       .post<{ name: string }>(
