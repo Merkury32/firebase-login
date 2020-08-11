@@ -22,9 +22,11 @@ export class UsersEditComponent implements OnInit {
   }
 
   reloadTable() {
-    this.userService.fetchUsers().subscribe((user) => {
-      this.users = user;
-    });
+    setTimeout(() => {
+      this.userService.fetchUsers().subscribe((user) => {
+        this.users = user;
+      });
+    }, 200);
   }
 
   toggle(className) {
