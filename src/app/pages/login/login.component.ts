@@ -5,6 +5,7 @@ import { AuthService } from '../../services/authService/auth.service';
 import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
 import { UserLogin } from 'src/app/models/user-login.model';
+import { AuthGuardService } from 'src/app/services/authService/authGuard/auth-guard.service';
 
 @Component({
   selector: 'login',
@@ -15,7 +16,11 @@ export class LoginComponent implements OnInit {
   user: User[];
   isWrongData = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private authGuardService: AuthGuardService
+  ) {}
 
   ngOnInit(): void {}
   onSubmit(form: NgForm) {
@@ -30,9 +35,10 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       (resData) => {
-        console.log(resData);
         this.isWrongData = false;
-        this.router.navigate(['/edit']);
+        console.log(resData);
+        this.authGuardService.canActivate(this.isWrongData);
+        this.router.navigate(['edit']);
       },
       (errorMessage) => {
         this.isWrongData = true;

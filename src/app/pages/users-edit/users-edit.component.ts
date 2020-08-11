@@ -60,7 +60,5 @@ export class UsersEditComponent implements OnInit {
     form.reset();
   }
 
-  onLogout() {
-    this.authService.onLogout();
-  }
+  onLogout() {}
 }

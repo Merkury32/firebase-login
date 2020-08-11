@@ -22,6 +22,4 @@ export class AuthService {
       }
     );
   }
-
-  onLogout() {}
 }
