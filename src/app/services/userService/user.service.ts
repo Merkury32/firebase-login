@@ -46,6 +46,7 @@ export class UserService {
 
   addUser(user: User) {
     const postData: User = user;
+
     this.http
       .post<{ name: string }>(
         'https://fir-login-1416c.firebaseio.com/users.json',
@@ -62,7 +63,6 @@ export class UserService {
           console.log(error);
         }
       );
-
     this.fetchUsers();
   }
 
