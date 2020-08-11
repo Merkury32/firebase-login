@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map, max } from 'rxjs/operators'
+import { map, max } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class UserService {
       return [];
     } else if (localStorage.length > 0) {
       let usersArr = JSON.parse(localStorage.getItem('users'));
-      let mapUser = usersArr.map(user => new User(user));
+      let mapUser = usersArr.map((user) => new User(user));
       return mapUser;
     }
   }
@@ -30,10 +30,9 @@ export class UserService {
   }
 
   addUser(user: User) {
-
     let usersArr = this.allUsers;
 
-    let mapIds = usersArr.map(ids => ids.id);
+    let mapIds = usersArr.map((ids) => ids.id);
 
     let maxId = Math.max(...mapIds);
 
@@ -51,7 +50,6 @@ export class UserService {
   }
 
   deleteUser(id) {
-
     let deletedUser = this.allUsers;
 
     deletedUser.splice(id, 1);
