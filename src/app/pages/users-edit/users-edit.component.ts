@@ -18,8 +18,7 @@ export class UsersEditComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -60,5 +59,7 @@ export class UsersEditComponent implements OnInit {
     form.reset();
   }
 
-  onLogout() {}
+  onLogout() {
+    this.authService.onLogout();
+  }
 }

@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserLogin } from 'src/app/models/user-login.model';
 import { environment } from 'src/environments/environment';
-import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+
+import firebase from '@firebase/app';
+import '@firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +23,14 @@ export class AuthService {
         returnSecureToken: true,
       }
     );
+  }
+
+  async onLogout() {
+    try {
+      await firebase.auth().signOut();
+      this.router.navigate(['./']);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

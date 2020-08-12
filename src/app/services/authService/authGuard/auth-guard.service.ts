@@ -7,17 +7,15 @@ import { LoginComponent } from 'src/app/pages/login/login.component';
   providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginComponent: LoginComponent) {}
 
-  canActivate(a): boolean {
-    console.log(a);
-    if (!a) {
+  canActivate(): boolean {
+    console.log(this.loginComponent.isWrongData);
+    if (!this.loginComponent.isWrongData) {
       console.log('true');
-      a = true;
       return true;
     }
     console.log('false');
-    this.router.navigate(['edit']);
     return false;
   }
 }
