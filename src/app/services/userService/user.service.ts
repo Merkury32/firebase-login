@@ -66,13 +66,19 @@ export class UserService {
     this.fetchUsers();
   }
 
-  deleteUser(id) {
-    let deletedUser = this.allUsers;
-
-    deletedUser.splice(id, 1);
-
-    this.allUsers = deletedUser;
-
-    return of(deletedUser);
+  deleteUser() {
+    this.http
+      .delete('https://fir-login-1416c.firebaseio.com/users.json', {
+        observe: 'response',
+      })
+      .subscribe(
+        (responseData) => {
+          console.log(responseData.body);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    this.fetchUsers();
   }
 }

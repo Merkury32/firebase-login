@@ -58,9 +58,7 @@ export class UsersEditComponent implements OnInit {
   }
 
   onDelete(userID: number) {
-    this.userService.deleteUser(userID).subscribe((users) => {
-      this.reloadTable();
-    });
+    this.userService.deleteUser();
   }
 
   onClear(form: NgForm) {
