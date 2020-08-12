@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map, max } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -32,21 +31,28 @@ export class UserService {
     this.http
       .get('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
-        let usersArr = Object.keys(users).map(function (id) {
-          let user = users[id];
-          return user;
-        });
-        let arrMap = usersArr.map((user) => new User(user));
-        for (let i = 0; i < arrMap.length; i++) {
-          usersAr.push(arrMap[i]);
+        if (usersAr !== undefined || null) {
+          let usersArr = Object.keys(users).map(function (id) {
+            let user = users[id];
+            return user;
+          });
+          let arrMap = usersArr.map((user) => new User(user));
+          for (let i = 0; i < arrMap.length; i++) {
+            usersAr.push(arrMap[i]);
+          }
         }
       });
     console.log(usersAr);
     return of(usersAr);
   }
 
+  test: string;
+
   addUser(user: User) {
-    const postData: User = user;
+    console.log(this.test);
+
+    let postData: User = user;
+
     this.http
       .post<{ name: string }>(
         'https://fir-login-1416c.firebaseio.com/users.json',
@@ -57,7 +63,8 @@ export class UserService {
       )
       .subscribe(
         (responseData) => {
-          console.log(responseData.body);
+          console.log(responseData.body.name);
+          return (this.test = responseData.body.name);
         },
         (error) => {
           console.log(error);

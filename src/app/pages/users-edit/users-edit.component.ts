@@ -43,7 +43,7 @@ export class UsersEditComponent implements OnInit {
       lastname: form.value.lastname,
       adress: form.value.adress,
       phone: form.value.phone,
-      id: '4',
+      id: '0',
     });
     // this.userService.addUser(user).subscribe(users => {
     //   this.reloadTable();
