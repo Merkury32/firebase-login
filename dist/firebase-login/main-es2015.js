@@ -442,7 +442,7 @@ class UsersEditComponent {
             lastname: form.value.lastname,
             adress: form.value.adress,
             phone: form.value.phone,
-            id: '4',
+            id: '0',
         });
         // this.userService.addUser(user).subscribe(users => {
         //   this.reloadTable();
@@ -455,9 +455,7 @@ class UsersEditComponent {
         this.reloadTable();
     }
     onDelete(userID) {
-        this.userService.deleteUser(userID).subscribe((users) => {
-            this.reloadTable();
-        });
+        this.userService.deleteUser();
     }
     onClear(form) {
         form.reset();
@@ -722,22 +720,38 @@ class UserService {
         this.http
             .get('https://fir-login-1416c.firebaseio.com/users.json')
             .subscribe((users) => {
-            let usersArr = Object.keys(users).map(function (id) {
-                let user = users[id];
-                return user;
-            });
-            let arrMap = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
-            for (let i = 0; i < arrMap.length; i++) {
-                usersAr.push(arrMap[i]);
+            if (usersAr !== undefined || null) {
+                let usersArr = Object.keys(users).map(function (id) {
+                    let user = users[id];
+                    return user;
+                });
+                let arrMap = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
+                for (let i = 0; i < arrMap.length; i++) {
+                    usersAr.push(arrMap[i]);
+                }
             }
         });
         console.log(usersAr);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
     }
     addUser(user) {
-        const postData = user;
+        console.log(this.test);
+        let postData = user;
         this.http
             .post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
+            observe: 'response',
+        })
+            .subscribe((responseData) => {
+            console.log(responseData.body.name);
+            return (this.test = responseData.body.name);
+        }, (error) => {
+            console.log(error);
+        });
+        this.fetchUsers();
+    }
+    deleteUser() {
+        this.http
+            .delete('https://fir-login-1416c.firebaseio.com/users.json', {
             observe: 'response',
         })
             .subscribe((responseData) => {
@@ -746,12 +760,6 @@ class UserService {
             console.log(error);
         });
         this.fetchUsers();
-    }
-    deleteUser(id) {
-        let deletedUser = this.allUsers;
-        deletedUser.splice(id, 1);
-        this.allUsers = deletedUser;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(deletedUser);
     }
 }
 UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };

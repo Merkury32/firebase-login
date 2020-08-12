@@ -866,7 +866,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             lastname: form.value.lastname,
             adress: form.value.adress,
             phone: form.value.phone,
-            id: '4'
+            id: '0'
           }); // this.userService.addUser(user).subscribe(users => {
           //   this.reloadTable();
           // })
@@ -881,11 +881,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onDelete",
         value: function onDelete(userID) {
-          var _this3 = this;
-
-          this.userService.deleteUser(userID).subscribe(function (users) {
-            _this3.reloadTable();
-          });
+          this.userService.deleteUser();
         }
       }, {
         key: "onClear",
@@ -1442,16 +1438,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // return of(usersArr);
           var usersAr = [];
           this.http.get('https://fir-login-1416c.firebaseio.com/users.json').subscribe(function (users) {
-            var usersArr = Object.keys(users).map(function (id) {
-              var user = users[id];
-              return user;
-            });
-            var arrMap = usersArr.map(function (user) {
-              return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
-            });
+            if (usersAr !== undefined || null) {
+              var usersArr = Object.keys(users).map(function (id) {
+                var user = users[id];
+                return user;
+              });
+              var arrMap = usersArr.map(function (user) {
+                return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
+              });
 
-            for (var i = 0; i < arrMap.length; i++) {
-              usersAr.push(arrMap[i]);
+              for (var i = 0; i < arrMap.length; i++) {
+                usersAr.push(arrMap[i]);
+              }
             }
           });
           console.log(usersAr);
@@ -1460,11 +1458,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "addUser",
         value: function addUser(user) {
+          var _this3 = this;
+
+          console.log(this.test);
           var postData = user;
           this.http.post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
             observe: 'response'
           }).subscribe(function (responseData) {
-            console.log(responseData.body);
+            console.log(responseData.body.name);
+            return _this3.test = responseData.body.name;
           }, function (error) {
             console.log(error);
           });
@@ -1472,11 +1474,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "deleteUser",
-        value: function deleteUser(id) {
-          var deletedUser = this.allUsers;
-          deletedUser.splice(id, 1);
-          this.allUsers = deletedUser;
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(deletedUser);
+        value: function deleteUser() {
+          this.http["delete"]('https://fir-login-1416c.firebaseio.com/users.json', {
+            observe: 'response'
+          }).subscribe(function (responseData) {
+            console.log(responseData.body);
+          }, function (error) {
+            console.log(error);
+          });
+          this.fetchUsers();
         }
       }, {
         key: "allUsers",
