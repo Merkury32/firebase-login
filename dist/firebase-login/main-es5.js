@@ -78,6 +78,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./pages/users-edit/users-edit.component */
     "./src/app/pages/users-edit/users-edit.component.ts");
+    /* harmony import */
+
+
+    var _services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./services/authService/authGuard/auth-guard.service */
+    "./src/app/services/authService/authGuard/auth-guard.service.ts");
 
     var routes = [{
       path: '',
@@ -87,7 +93,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       component: _pages_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"]
     }, {
       path: 'edit',
-      component: _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__["UsersEditComponent"]
+      component: _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__["UsersEditComponent"],
+      canActivate: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]]
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -274,6 +281,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_fire__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! @angular/fire */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
+    /* harmony import */
+
+
+    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! @angular/fire/firestore */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
+    /* harmony import */
+
+
+    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! @angular/fire/storage */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
+    /* harmony import */
+
+
+    var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    /*! @angular/fire/auth */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
+    /* harmony import */
+
+
+    var src_environments_environment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! src/environments/environment */
+    "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    /*! ./services/authService/authGuard/auth-guard.service */
+    "./src/app/services/authService/authGuard/auth-guard.service.ts");
+    /* harmony import */
+
+
+    var firebase__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! firebase */
+    "./node_modules/firebase/dist/index.cjs.js");
+    /* harmony import */
+
+
+    var firebase__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_15__);
+
+    firebase__WEBPACK_IMPORTED_MODULE_15__["initializeApp"](src_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].firebase);
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -287,14 +342,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       factory: function AppModule_Factory(t) {
         return new (t || AppModule)();
       },
-      providers: [],
-      imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"]]]
+      providers: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_14__["AuthGuardService"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]],
+      imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuthModule"]]]
     });
 
     (function () {
       (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, {
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"], _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_5__["UsersEditComponent"], _pages_users_edit_add_user_popup_add_user_popup_component__WEBPACK_IMPORTED_MODULE_7__["AddUserPopupComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"]]
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuthModule"]]
       });
     })();
     /*@__PURE__*/
@@ -305,8 +360,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
           declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"], _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_5__["UsersEditComponent"], _pages_users_edit_add_user_popup_add_user_popup_component__WEBPACK_IMPORTED_MODULE_7__["AddUserPopupComponent"]],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"]],
-          providers: [],
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuthModule"]],
+          providers: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_14__["AuthGuardService"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         }]
       }], null, null);
@@ -372,15 +427,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    var _services_authService_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../../services/authService/auth.service */
+    "./src/app/services/authService/auth.service.ts");
     /* harmony import */
 
 
-    var _services_authService_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ../../services/authService/auth.service */
-    "./src/app/services/authService/auth.service.ts");
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
     /* harmony import */
 
 
@@ -405,12 +460,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     var LoginComponent = /*#__PURE__*/function () {
-      function LoginComponent(router, authService) {
+      function LoginComponent(authService, router) {
         _classCallCheck(this, LoginComponent);
 
-        this.router = router;
         this.authService = authService;
-        this.isWrongData = false;
+        this.router = router;
       }
 
       _createClass(LoginComponent, [{
@@ -427,10 +481,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var authObs;
           authObs = this.authService.onLogin(email, password);
           authObs.subscribe(function (resData) {
-            console.log(resData);
             _this.isWrongData = false;
+            console.log(resData);
 
-            _this.router.navigate(['/edit']);
+            _this.router.navigate(['edit']);
+
+            !!_this.isWrongData;
           }, function (errorMessage) {
             _this.isWrongData = true;
             console.log(errorMessage);
@@ -442,7 +498,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     LoginComponent.ɵfac = function LoginComponent_Factory(t) {
-      return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_authService_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]));
+      return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_authService_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]));
     };
 
     LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -531,9 +587,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+          type: _services_authService_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]
         }, {
-          type: _services_authService_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
         }];
       }, null);
     })();
@@ -679,9 +735,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    var src_app_services_authService_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/services/authService/auth.service */
+    "./src/app/services/authService/auth.service.ts");
     /* harmony import */
 
 
@@ -774,11 +830,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     var UsersEditComponent = /*#__PURE__*/function () {
-      function UsersEditComponent(userService, router) {
+      function UsersEditComponent(userService, authService) {
         _classCallCheck(this, UsersEditComponent);
 
         this.userService = userService;
-        this.router = router;
+        this.authService = authService;
       }
 
       _createClass(UsersEditComponent, [{
@@ -791,9 +847,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function reloadTable() {
           var _this2 = this;
 
-          this.userService.fetchUsers().subscribe(function (user) {
-            _this2.users = user;
-          });
+          setTimeout(function () {
+            _this2.userService.fetchUsers().subscribe(function (user) {
+              _this2.users = user;
+            });
+          }, 200);
         }
       }, {
         key: "toggle",
@@ -837,7 +895,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onLogout",
         value: function onLogout() {
-          this.router.navigate(['./']);
+          this.authService.onLogout();
         }
       }]);
 
@@ -845,7 +903,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     UsersEditComponent.ɵfac = function UsersEditComponent_Factory(t) {
-      return new (t || UsersEditComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_userService_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]));
+      return new (t || UsersEditComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_userService_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_authService_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]));
     };
 
     UsersEditComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -1069,7 +1127,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return [{
           type: _services_userService_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]
         }, {
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+          type: src_app_services_authService_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]
         }];
       }, {
         userPopup: [{
@@ -1104,37 +1162,100 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
     /* harmony import */
 
 
-    var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var src_environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! src/environments/environment */
     "./src/environments/environment.ts");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @firebase/app */
+    "./node_modules/@firebase/app/dist/index.cjs.js");
+    /* harmony import */
+
+
+    var _firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_firebase_app__WEBPACK_IMPORTED_MODULE_3__);
+    /* harmony import */
+
+
+    var _firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @firebase/auth */
+    "./node_modules/@firebase/auth/dist/auth.js");
+    /* harmony import */
+
+
+    var _firebase_auth__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_firebase_auth__WEBPACK_IMPORTED_MODULE_4__);
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(http) {
+      function AuthService(http, router) {
         _classCallCheck(this, AuthService);
 
         this.http = http;
+        this.router = router;
       }
 
       _createClass(AuthService, [{
         key: "onLogin",
         value: function onLogin(email, password) {
-          return this.http.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].firebaseApiKey, {
+          return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].firebase.apiKey, {
             email: email,
             password: password,
             returnSecureToken: true
           });
+        }
+      }, {
+        key: "onLogout",
+        value: function onLogout() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.prev = 0;
+                    _context.next = 3;
+                    return _firebase_app__WEBPACK_IMPORTED_MODULE_3___default.a.auth().signOut();
+
+                  case 3:
+                    this.router.navigate(['./']);
+                    _context.next = 9;
+                    break;
+
+                  case 6:
+                    _context.prev = 6;
+                    _context.t0 = _context["catch"](0);
+                    console.log(_context.t0);
+
+                  case 9:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this, [[0, 6]]);
+          }));
         }
       }]);
 
@@ -1142,10 +1263,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AuthService.ɵfac = function AuthService_Factory(t) {
-      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]));
+      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]));
     };
 
-    AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+    AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
       token: AuthService,
       factory: AuthService.ɵfac,
       providedIn: 'root'
@@ -1153,14 +1274,109 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*@__PURE__*/
 
     (function () {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AuthService, [{
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AuthService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
+        args: [{
+          providedIn: 'root'
+        }]
+      }], function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/services/authService/authGuard/auth-guard.service.ts":
+  /*!**********************************************************************!*\
+    !*** ./src/app/services/authService/authGuard/auth-guard.service.ts ***!
+    \**********************************************************************/
+
+  /*! exports provided: AuthGuardService */
+
+  /***/
+  function srcAppServicesAuthServiceAuthGuardAuthGuardServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AuthGuardService", function () {
+      return AuthGuardService;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_app_pages_login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/app/pages/login/login.component */
+    "./src/app/pages/login/login.component.ts");
+
+    var AuthGuardService = /*#__PURE__*/function () {
+      function AuthGuardService(router, loginComponent) {
+        _classCallCheck(this, AuthGuardService);
+
+        this.router = router;
+        this.loginComponent = loginComponent;
+      }
+
+      _createClass(AuthGuardService, [{
+        key: "canActivate",
+        value: function canActivate() {
+          console.log(this.loginComponent.isWrongData);
+
+          if (!this.loginComponent.isWrongData) {
+            console.log('true');
+            return true;
+          }
+
+          console.log('false');
+          return false;
+        }
+      }]);
+
+      return AuthGuardService;
+    }();
+
+    AuthGuardService.ɵfac = function AuthGuardService_Factory(t) {
+      return new (t || AuthGuardService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](src_app_pages_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"]));
+    };
+
+    AuthGuardService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+      token: AuthGuardService,
+      factory: AuthGuardService.ɵfac,
+      providedIn: 'root'
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AuthGuardService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
           providedIn: 'root'
         }]
       }], function () {
         return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+        }, {
+          type: src_app_pages_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"]
         }];
       }, null);
     })();
@@ -1238,6 +1454,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               usersAr.push(arrMap[i]);
             }
           });
+          console.log(usersAr);
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
         }
       }, {
@@ -1334,7 +1551,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var environment = {
       production: false,
-      firebaseApiKey: "AIzaSyA7pMaqfDaMKogW45qOCNFWxl_OsU0tByY"
+      firebase: {
+        apiKey: 'AIzaSyA7pMaqfDaMKogW45qOCNFWxl_OsU0tByY',
+        authDomain: 'fir-login-1416c.firebaseapp.com',
+        databaseURL: 'https://fir-login-1416c.firebaseio.com',
+        projectId: 'fir-login-1416c',
+        storageBucket: 'fir-login-1416c.appspot.com',
+        messagingSenderId: '29457885746',
+        appId: '1:29457885746:web:c3e7c3bd2cee9aad74ea2b'
+      }
     };
     /*
      * For easier debugging in development mode, you can import the following file
