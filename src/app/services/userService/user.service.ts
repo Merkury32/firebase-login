@@ -41,12 +41,12 @@ export class UserService {
           usersAr.push(arrMap[i]);
         }
       });
+    console.log(usersAr);
     return of(usersAr);
   }
 
   addUser(user: User) {
     const postData: User = user;
-
     this.http
       .post<{ name: string }>(
         'https://fir-login-1416c.firebaseio.com/users.json',

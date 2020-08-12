@@ -14,13 +14,9 @@ import { AuthGuardService } from 'src/app/services/authService/authGuard/auth-gu
 })
 export class LoginComponent implements OnInit {
   user: User[];
-  isWrongData = false;
+  isWrongData: boolean;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private authGuardService: AuthGuardService
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
   onSubmit(form: NgForm) {
@@ -37,8 +33,8 @@ export class LoginComponent implements OnInit {
       (resData) => {
         this.isWrongData = false;
         console.log(resData);
-        this.authGuardService.canActivate(this.isWrongData);
         this.router.navigate(['edit']);
+        !!this.isWrongData;
       },
       (errorMessage) => {
         this.isWrongData = true;
