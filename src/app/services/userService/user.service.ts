@@ -7,19 +7,19 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UserService {
-  get allUsers(): User[] {
-    if (localStorage.getItem('users') === null) {
-      return [];
-    } else if (localStorage.length > 0) {
-      let usersArr = JSON.parse(localStorage.getItem('users'));
-      let mapUser = usersArr.map((user) => new User(user));
-      return mapUser;
-    }
-  }
+  // get allUsers(): User[] {
+  //   if (localStorage.getItem('users') === null) {
+  //     return [];
+  //   } else if (localStorage.length > 0) {
+  //     let usersArr = JSON.parse(localStorage.getItem('users'));
+  //     let mapUser = usersArr.map((user) => new User(user));
+  //     return mapUser;
+  //   }
+  // }
 
-  set allUsers(users: User[]) {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
+  // set allUsers(users: User[]) {
+  //   localStorage.setItem('users', JSON.stringify(users));
+  // }
 
   constructor(private http: HttpClient) {}
 
@@ -31,26 +31,20 @@ export class UserService {
     this.http
       .get('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
-        if (usersAr !== undefined || null) {
-          let usersArr = Object.keys(users).map(function (id) {
-            let user = users[id];
-            return user;
-          });
-          let arrMap = usersArr.map((user) => new User(user));
-          for (let i = 0; i < arrMap.length; i++) {
-            usersAr.push(arrMap[i]);
-          }
+        let usersArr = Object.keys(users).map(function (id) {
+          let user = users[id];
+          return user;
+        });
+        let arrMap = usersArr.map((user) => new User(user));
+        for (let i = 0; i < arrMap.length; i++) {
+          usersAr.push(arrMap[i]);
         }
       });
     console.log(usersAr);
     return of(usersAr);
   }
 
-  test: string;
-
   addUser(user: User) {
-    console.log(this.test);
-
     let postData: User = user;
 
     this.http
@@ -64,7 +58,6 @@ export class UserService {
       .subscribe(
         (responseData) => {
           console.log(responseData.body.name);
-          return (this.test = responseData.body.name);
         },
         (error) => {
           console.log(error);
