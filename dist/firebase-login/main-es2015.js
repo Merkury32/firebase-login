@@ -37,8 +37,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _pages_login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/login/login.component */ "./src/app/pages/login/login.component.ts");
 /* harmony import */ var _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/users-edit/users-edit.component */ "./src/app/pages/users-edit/users-edit.component.ts");
-/* harmony import */ var _services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/authService/authGuard/auth-guard.service */ "./src/app/services/authService/authGuard/auth-guard.service.ts");
-
 
 
 
@@ -51,7 +49,6 @@ const routes = [
     {
         path: 'edit',
         component: _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__["UsersEditComponent"],
-        canActivate: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]],
     },
 ];
 class AppRoutingModule {
@@ -697,21 +694,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class UserService {
+    // get allUsers(): User[] {
+    //   if (localStorage.getItem('users') === null) {
+    //     return [];
+    //   } else if (localStorage.length > 0) {
+    //     let usersArr = JSON.parse(localStorage.getItem('users'));
+    //     let mapUser = usersArr.map((user) => new User(user));
+    //     return mapUser;
+    //   }
+    // }
+    // set allUsers(users: User[]) {
+    //   localStorage.setItem('users', JSON.stringify(users));
+    // }
     constructor(http) {
         this.http = http;
-    }
-    get allUsers() {
-        if (localStorage.getItem('users') === null) {
-            return [];
-        }
-        else if (localStorage.length > 0) {
-            let usersArr = JSON.parse(localStorage.getItem('users'));
-            let mapUser = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
-            return mapUser;
-        }
-    }
-    set allUsers(users) {
-        localStorage.setItem('users', JSON.stringify(users));
     }
     fetchUsers() {
         // let usersArr = this.allUsers;
@@ -720,22 +716,19 @@ class UserService {
         this.http
             .get('https://fir-login-1416c.firebaseio.com/users.json')
             .subscribe((users) => {
-            if (usersAr !== undefined || null) {
-                let usersArr = Object.keys(users).map(function (id) {
-                    let user = users[id];
-                    return user;
-                });
-                let arrMap = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
-                for (let i = 0; i < arrMap.length; i++) {
-                    usersAr.push(arrMap[i]);
-                }
+            let usersArr = Object.keys(users).map(function (id) {
+                let user = users[id];
+                return user;
+            });
+            let arrMap = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
+            for (let i = 0; i < arrMap.length; i++) {
+                usersAr.push(arrMap[i]);
             }
         });
         console.log(usersAr);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
     }
     addUser(user) {
-        console.log(this.test);
         let postData = user;
         this.http
             .post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
@@ -743,7 +736,6 @@ class UserService {
         })
             .subscribe((responseData) => {
             console.log(responseData.body.name);
-            return (this.test = responseData.body.name);
         }, (error) => {
             console.log(error);
         });

@@ -78,12 +78,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./pages/users-edit/users-edit.component */
     "./src/app/pages/users-edit/users-edit.component.ts");
-    /* harmony import */
-
-
-    var _services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! ./services/authService/authGuard/auth-guard.service */
-    "./src/app/services/authService/authGuard/auth-guard.service.ts");
 
     var routes = [{
       path: '',
@@ -93,8 +87,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       component: _pages_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"]
     }, {
       path: 'edit',
-      component: _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__["UsersEditComponent"],
-      canActivate: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]]
+      component: _pages_users_edit_users_edit_component__WEBPACK_IMPORTED_MODULE_3__["UsersEditComponent"]
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -1425,6 +1418,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 
     var UserService = /*#__PURE__*/function () {
+      // get allUsers(): User[] {
+      //   if (localStorage.getItem('users') === null) {
+      //     return [];
+      //   } else if (localStorage.length > 0) {
+      //     let usersArr = JSON.parse(localStorage.getItem('users'));
+      //     let mapUser = usersArr.map((user) => new User(user));
+      //     return mapUser;
+      //   }
+      // }
+      // set allUsers(users: User[]) {
+      //   localStorage.setItem('users', JSON.stringify(users));
+      // }
       function UserService(http) {
         _classCallCheck(this, UserService);
 
@@ -1438,18 +1443,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // return of(usersArr);
           var usersAr = [];
           this.http.get('https://fir-login-1416c.firebaseio.com/users.json').subscribe(function (users) {
-            if (usersAr !== undefined || null) {
-              var usersArr = Object.keys(users).map(function (id) {
-                var user = users[id];
-                return user;
-              });
-              var arrMap = usersArr.map(function (user) {
-                return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
-              });
+            var usersArr = Object.keys(users).map(function (id) {
+              var user = users[id];
+              return user;
+            });
+            var arrMap = usersArr.map(function (user) {
+              return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
+            });
 
-              for (var i = 0; i < arrMap.length; i++) {
-                usersAr.push(arrMap[i]);
-              }
+            for (var i = 0; i < arrMap.length; i++) {
+              usersAr.push(arrMap[i]);
             }
           });
           console.log(usersAr);
@@ -1458,15 +1461,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "addUser",
         value: function addUser(user) {
-          var _this3 = this;
-
-          console.log(this.test);
           var postData = user;
           this.http.post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
             observe: 'response'
           }).subscribe(function (responseData) {
             console.log(responseData.body.name);
-            return _this3.test = responseData.body.name;
           }, function (error) {
             console.log(error);
           });
@@ -1483,22 +1482,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log(error);
           });
           this.fetchUsers();
-        }
-      }, {
-        key: "allUsers",
-        get: function get() {
-          if (localStorage.getItem('users') === null) {
-            return [];
-          } else if (localStorage.length > 0) {
-            var usersArr = JSON.parse(localStorage.getItem('users'));
-            var mapUser = usersArr.map(function (user) {
-              return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user);
-            });
-            return mapUser;
-          }
-        },
-        set: function set(users) {
-          localStorage.setItem('users', JSON.stringify(users));
         }
       }]);
 
