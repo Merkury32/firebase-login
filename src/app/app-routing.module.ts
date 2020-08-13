@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'edit',
     component: UsersEditComponent,
-    canActivate: [AuthGuardService],
+    //canActivate: [AuthGuardService],
   },
 ];
 

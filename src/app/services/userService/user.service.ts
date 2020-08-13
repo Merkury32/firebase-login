@@ -40,6 +40,7 @@ export class UserService {
           usersAr.push(arrMap[i]);
         }
       });
+
     console.log(usersAr);
     return of(usersAr);
   }
