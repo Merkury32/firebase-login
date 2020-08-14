@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserLogin } from 'src/app/models/user-login.model';
-import { environment } from 'src/environments/environment';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
-import firebase from '@firebase/app';
 import '@firebase/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private fireAuth: AngularFireAuth
+  ) {}
 
   onLogin(email: string, password: string) {
-    return this.http.post<UserLogin>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-        environment.firebase.apiKey,
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }
-    );
+    // return this.http.post<UserLogin>(
+    //   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+    //     environment.firebaseConfig.apiKey,
+    //   {
+    //     email: email,
+    //     password: password,
+    //     returnSecureToken: true,
+    //   }
+    // );
+    firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
   async onLogout() {

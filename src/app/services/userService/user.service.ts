@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, max } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
-
 @Injectable({
   providedIn: 'root',
 })

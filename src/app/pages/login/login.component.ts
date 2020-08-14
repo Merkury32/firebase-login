@@ -25,21 +25,19 @@ export class LoginComponent implements OnInit {
 
     console.log(`Login with email: ${email} and password: ${password}`);
 
-    let authObs: Observable<UserLogin>;
+    this.authService.onLogin(email, password);
 
-    authObs = this.authService.onLogin(email, password);
-
-    authObs.subscribe(
-      (resData) => {
-        this.isWrongData = false;
-        console.log(resData);
-        this.router.navigate(['edit']);
-        !!this.isWrongData;
-      },
-      (errorMessage) => {
-        this.isWrongData = true;
-        console.log(errorMessage);
-      }
-    );
+    // authObs.subscribe(
+    //   (resData) => {
+    //     this.isWrongData = false;
+    //     console.log(resData);
+    //     this.router.navigate(['edit']);
+    //     !!this.isWrongData;
+    //   },
+    //   (errorMessage) => {
+    //     this.isWrongData = true;
+    //     console.log(errorMessage);
+    //   }
+    // );
   }
 }
