@@ -9,15 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { AddUserPopupComponent } from './pages/users-edit/add-user-popup/add-user-popup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
 import { AuthGuardService } from './services/authService/authGuard/auth-guard.service';
-
-import * as firebase from 'firebase';
-
-firebase.initializeApp(environment.firebase);
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,9 +25,7 @@ firebase.initializeApp(environment.firebase);
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AngularFireModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
   providers: [AuthGuardService, LoginComponent],

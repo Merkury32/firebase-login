@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebase: {
+  firebaseConfig: {
     apiKey: 'AIzaSyA7pMaqfDaMKogW45qOCNFWxl_OsU0tByY',
     authDomain: 'fir-login-1416c.firebaseapp.com',
     databaseURL: 'https://fir-login-1416c.firebaseio.com',

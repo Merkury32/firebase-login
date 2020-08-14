@@ -3,7 +3,8 @@ import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
-
+import '@firebase/auth';
+import * as firebase from 'firebase/app';
 @Injectable({
   providedIn: 'root',
 })
