@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,25 +25,15 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   fetchUsers() {
-    // let usersArr = this.allUsers;
-
-    // return of(usersArr);
-    let usersAr: User[] = [];
+    let result = new Subject<User[]>();
     this.http
       .get('https://fir-login-1416c.firebaseio.com/users.json')
       .subscribe((users) => {
-        let usersArr = Object.keys(users).map(function (id) {
-          let user = users[id];
-          return user;
-        });
-        let arrMap = usersArr.map((user) => new User(user));
-        for (let i = 0; i < arrMap.length; i++) {
-          usersAr.push(arrMap[i]);
-        }
+        let usersAr = Object.keys(users).map((id) => new User(users[id]));
+        result.next(usersAr);
       });
 
-    console.log(usersAr);
-    return of(usersAr);
+    return result.pipe(take(1));
   }
 
   addUser(user: User) {
