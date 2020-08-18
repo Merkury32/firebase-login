@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
     console.log(`Login with email: ${email} and password: ${password}`);
 
-    this.authService.onLogin(email, password);
+    // let authObs = this.authService.onLogin(email, password);
 
     // authObs.subscribe(
     //   (resData) => {
@@ -39,5 +39,7 @@ export class LoginComponent implements OnInit {
     //     console.log(errorMessage);
     //   }
     // );
+
+    this.authService.onLogin(email, password);
   }
 }

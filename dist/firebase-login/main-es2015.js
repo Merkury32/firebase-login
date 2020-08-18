@@ -124,13 +124,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_users_edit_add_user_popup_add_user_popup_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/users-edit/add-user-popup/add-user-popup.component */ "./src/app/pages/users-edit/add-user-popup/add-user-popup.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
-/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./services/authService/authGuard/auth-guard.service */ "./src/app/services/authService/authGuard/auth-guard.service.ts");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
+/* harmony import */ var _services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./services/authService/authGuard/auth-guard.service */ "./src/app/services/authService/authGuard/auth-guard.service.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 
 
 
@@ -146,21 +142,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-firebase__WEBPACK_IMPORTED_MODULE_15__["initializeApp"](src_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].firebase);
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_14__["AuthGuardService"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]], imports: [[
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_11__["AuthGuardService"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
-            _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"],
-            _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
-            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"],
-            _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuthModule"],
+            _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].firebaseConfig),
+            _angular_fire_auth__WEBPACK_IMPORTED_MODULE_10__["AngularFireAuthModule"],
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
         _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"],
@@ -168,11 +159,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _pages_users_edit_add_user_popup_add_user_popup_component__WEBPACK_IMPORTED_MODULE_7__["AddUserPopupComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
-        _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"],
-        _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
-        _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"],
-        _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuthModule"]] }); })();
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_10__["AngularFireAuthModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
@@ -187,12 +174,10 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
                     _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
                     _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
-                    _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"],
-                    _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
-                    _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"],
-                    _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuthModule"],
+                    _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].firebaseConfig),
+                    _angular_fire_auth__WEBPACK_IMPORTED_MODULE_10__["AngularFireAuthModule"],
                 ],
-                providers: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_14__["AuthGuardService"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]],
+                providers: [_services_authService_authGuard_auth_guard_service__WEBPACK_IMPORTED_MODULE_11__["AuthGuardService"], _pages_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
             }]
     }], null, null); })();
@@ -256,17 +241,20 @@ class LoginComponent {
         const email = form.value.email;
         const password = form.value.password;
         console.log(`Login with email: ${email} and password: ${password}`);
-        let authObs;
-        authObs = this.authService.onLogin(email, password);
-        authObs.subscribe((resData) => {
-            this.isWrongData = false;
-            console.log(resData);
-            this.router.navigate(['edit']);
-            !!this.isWrongData;
-        }, (errorMessage) => {
-            this.isWrongData = true;
-            console.log(errorMessage);
-        });
+        // let authObs = this.authService.onLogin(email, password);
+        // authObs.subscribe(
+        //   (resData) => {
+        //     this.isWrongData = false;
+        //     console.log(resData);
+        //     this.router.navigate(['edit']);
+        //     !!this.isWrongData;
+        //   },
+        //   (errorMessage) => {
+        //     this.isWrongData = true;
+        //     console.log(errorMessage);
+        //   }
+        // );
+        this.authService.onLogin(email, password);
     }
 }
 LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_authService_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
@@ -424,11 +412,7 @@ class UsersEditComponent {
         this.reloadTable();
     }
     reloadTable() {
-        setTimeout(() => {
-            this.userService.fetchUsers().subscribe((user) => {
-                this.users = user;
-            });
-        }, 200);
+        this.userService.fetchUsers();
     }
     toggle(className) {
         this.userPopup.toggle(className);
@@ -578,15 +562,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @firebase/app */ "./node_modules/@firebase/app/dist/index.cjs.js");
-/* harmony import */ var _firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_firebase_app__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @firebase/auth */ "./node_modules/@firebase/auth/dist/auth.js");
-/* harmony import */ var _firebase_auth__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_firebase_auth__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-
-
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
 
 
 
@@ -594,38 +573,40 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class AuthService {
-    constructor(http, router) {
-        this.http = http;
+    constructor(router, fireAuth) {
         this.router = router;
+        this.fireAuth = fireAuth;
     }
     onLogin(email, password) {
-        return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-            src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].firebase.apiKey, {
-            email: email,
-            password: password,
-            returnSecureToken: true,
+        firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]()
+            .signInWithEmailAndPassword(email, password)
+            .then(function () {
+            console.log('Succes');
+        })
+            .catch(function (error) {
+            console.log(error);
         });
     }
     onLogout() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             try {
-                yield _firebase_app__WEBPACK_IMPORTED_MODULE_3___default.a.auth().signOut();
+                yield firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signOut();
                 this.router.navigate(['./']);
             }
-            catch (e) {
-                console.log(e);
+            catch (error) {
+                console.log(error);
             }
         });
     }
 }
-AuthService.ɵfac = function AuthService_Factory(t) { return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"])); };
+AuthService.ɵfac = function AuthService_Factory(t) { return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"])); };
 AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: AuthService, factory: AuthService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AuthService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
         args: [{
                 providedIn: 'root',
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }]; }, null); })();
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }, { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"] }]; }, null); })();
 
 
 /***/ }),
@@ -686,82 +667,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/user.model */ "./src/app/models/user.model.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/database */ "./node_modules/firebase/database/dist/index.esm.js");
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+
+
 
 
 
 
 
 class UserService {
-    // get allUsers(): User[] {
-    //   if (localStorage.getItem('users') === null) {
-    //     return [];
-    //   } else if (localStorage.length > 0) {
-    //     let usersArr = JSON.parse(localStorage.getItem('users'));
-    //     let mapUser = usersArr.map((user) => new User(user));
-    //     return mapUser;
-    //   }
-    // }
-    // set allUsers(users: User[]) {
-    //   localStorage.setItem('users', JSON.stringify(users));
-    // }
     constructor(http) {
         this.http = http;
     }
     fetchUsers() {
-        // let usersArr = this.allUsers;
-        // return of(usersArr);
-        let usersAr = [];
-        this.http
-            .get('https://fir-login-1416c.firebaseio.com/users.json')
-            .subscribe((users) => {
-            let usersArr = Object.keys(users).map(function (id) {
-                let user = users[id];
-                return user;
-            });
-            let arrMap = usersArr.map((user) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](user));
-            for (let i = 0; i < arrMap.length; i++) {
-                usersAr.push(arrMap[i]);
-            }
+        let result = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        // this.http
+        //   .get('https://fir-login-1416c.firebaseio.com/users.json')
+        //   .subscribe((users) => {
+        //     let usersAr = Object.keys(users).map((id) => new User(users[id]));
+        //     result.next(usersAr);
+        //   });
+        // return result.pipe(take(1));
+        firebase_app__WEBPACK_IMPORTED_MODULE_2__["initializeApp"](src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].firebaseConfig);
+        let dbRefObject = firebase_app__WEBPACK_IMPORTED_MODULE_2__["database"]()
+            .ref('users')
+            .on('value', (snap) => {
+            console.log(snap);
         });
-        console.log(usersAr);
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersAr);
     }
     addUser(user) {
         let postData = user;
-        this.http
-            .post('https://fir-login-1416c.firebaseio.com/users.json', postData, {
-            observe: 'response',
-        })
-            .subscribe((responseData) => {
-            console.log(responseData.body.name);
-        }, (error) => {
-            console.log(error);
+        let database = firebase_app__WEBPACK_IMPORTED_MODULE_2__["database"]();
+        database.ref('users/' + '2').set({
+            firstname: postData.firstname,
+            lastname: postData.lastname,
+            adress: postData.adress,
+            phone: postData.phone,
         });
-        this.fetchUsers();
+        // this.http
+        //   .post<{ name: string }>(
+        //     'https://fir-login-1416c.firebaseio.com/users.json',
+        //     postData,
+        //     {
+        //       observe: 'response',
+        //     }
+        //   )
+        //   .subscribe(
+        //     (responseData) => {
+        //       console.log(responseData.body.name);
+        //     },
+        //     (error) => {
+        //       console.log(error);
+        //     }
+        //   );
+        // this.fetchUsers();
     }
     deleteUser() {
-        this.http
-            .delete('https://fir-login-1416c.firebaseio.com/users.json', {
-            observe: 'response',
-        })
-            .subscribe((responseData) => {
-            console.log(responseData.body);
-        }, (error) => {
-            console.log(error);
-        });
-        this.fetchUsers();
+        // Later
     }
 }
-UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
+UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"])); };
 UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root',
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
@@ -781,7 +759,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    firebase: {
+    firebaseConfig: {
         apiKey: 'AIzaSyA7pMaqfDaMKogW45qOCNFWxl_OsU0tByY',
         authDomain: 'fir-login-1416c.firebaseapp.com',
         databaseURL: 'https://fir-login-1416c.firebaseio.com',

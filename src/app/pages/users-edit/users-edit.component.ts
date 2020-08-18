@@ -26,11 +26,7 @@ export class UsersEditComponent implements OnInit {
   }
 
   reloadTable() {
-    setTimeout(() => {
-      this.userService.fetchUsers().subscribe((user) => {
-        this.users = user;
-      });
-    }, 200);
+    this.userService.fetchUsers();
   }
 
   toggle(className) {
