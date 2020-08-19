@@ -19,7 +19,7 @@ export class AuthService {
         this.router.navigate(['edit']);
         console.log('Succes');
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
