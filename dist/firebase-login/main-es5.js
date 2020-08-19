@@ -1163,7 +1163,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AuthService, [{
         key: "onLogin",
         value: function onLogin(email, password) {
+          var _this = this;
+
           firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signInWithEmailAndPassword(email, password).then(function () {
+            _this.router.navigate(['edit']);
+
             console.log('Succes');
           })["catch"](function (error) {
             console.log(error);
@@ -1412,7 +1416,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           firebase_app__WEBPACK_IMPORTED_MODULE_2__["initializeApp"](src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].firebaseConfig);
           var dbRefObject = firebase_app__WEBPACK_IMPORTED_MODULE_2__["database"]().ref('users').on('value', function (snap) {
-            console.log(snap);
+            console.log(snap.val());
           });
         }
       }, {
@@ -1425,23 +1429,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             lastname: postData.lastname,
             adress: postData.adress,
             phone: postData.phone
-          }); // this.http
-          //   .post<{ name: string }>(
-          //     'https://fir-login-1416c.firebaseio.com/users.json',
-          //     postData,
-          //     {
-          //       observe: 'response',
-          //     }
-          //   )
-          //   .subscribe(
-          //     (responseData) => {
-          //       console.log(responseData.body.name);
-          //     },
-          //     (error) => {
-          //       console.log(error);
-          //     }
-          //   );
-          // this.fetchUsers();
+          });
         }
       }, {
         key: "deleteUser",

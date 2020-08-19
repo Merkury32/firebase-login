@@ -580,10 +580,11 @@ class AuthService {
     onLogin(email, password) {
         firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]()
             .signInWithEmailAndPassword(email, password)
-            .then(function () {
+            .then(() => {
+            this.router.navigate(['edit']);
             console.log('Succes');
         })
-            .catch(function (error) {
+            .catch((error) => {
             console.log(error);
         });
     }
@@ -698,7 +699,7 @@ class UserService {
         let dbRefObject = firebase_app__WEBPACK_IMPORTED_MODULE_2__["database"]()
             .ref('users')
             .on('value', (snap) => {
-            console.log(snap);
+            console.log(snap.val());
         });
     }
     addUser(user) {
@@ -710,23 +711,6 @@ class UserService {
             adress: postData.adress,
             phone: postData.phone,
         });
-        // this.http
-        //   .post<{ name: string }>(
-        //     'https://fir-login-1416c.firebaseio.com/users.json',
-        //     postData,
-        //     {
-        //       observe: 'response',
-        //     }
-        //   )
-        //   .subscribe(
-        //     (responseData) => {
-        //       console.log(responseData.body.name);
-        //     },
-        //     (error) => {
-        //       console.log(error);
-        //     }
-        //   );
-        // this.fetchUsers();
     }
     deleteUser() {
         // Later
