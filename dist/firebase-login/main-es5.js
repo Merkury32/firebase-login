@@ -298,6 +298,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var src_environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! src/environments/environment */
     "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var firebase__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! firebase */
+    "./node_modules/firebase/dist/index.cjs.js");
+    /* harmony import */
+
+
+    var firebase__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_13__);
+
+    firebase__WEBPACK_IMPORTED_MODULE_13__["initializeApp"](src_environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].firebaseConfig);
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1386,13 +1398,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! src/environments/environment */
-    "./src/environments/environment.ts");
-    /* harmony import */
-
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 
@@ -1414,8 +1420,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           //   });
           // return result.pipe(take(1));
 
-          firebase_app__WEBPACK_IMPORTED_MODULE_2__["initializeApp"](src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].firebaseConfig);
-          var dbRefObject = firebase_app__WEBPACK_IMPORTED_MODULE_2__["database"]().ref('users').on('value', function (snap) {
+          firebase_app__WEBPACK_IMPORTED_MODULE_2__["database"]().ref('users').on('value', function (snap) {
             console.log(snap.val());
           });
         }
@@ -1441,7 +1446,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     UserService.ɵfac = function UserService_Factory(t) {
-      return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]));
+      return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]));
     };
 
     UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -1459,7 +1464,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]
         }];
       }, null);
     })();
