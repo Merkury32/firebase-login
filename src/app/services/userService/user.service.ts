@@ -29,7 +29,7 @@ export class UserService {
       .database()
       .ref('users')
       .on('value', (snap) => {
-        console.log(snap);
+        console.log(snap.val());
       });
   }
 
@@ -43,24 +43,6 @@ export class UserService {
       adress: postData.adress,
       phone: postData.phone,
     });
-
-    // this.http
-    //   .post<{ name: string }>(
-    //     'https://fir-login-1416c.firebaseio.com/users.json',
-    //     postData,
-    //     {
-    //       observe: 'response',
-    //     }
-    //   )
-    //   .subscribe(
-    //     (responseData) => {
-    //       console.log(responseData.body.name);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
-    // this.fetchUsers();
   }
 
   deleteUser() {
