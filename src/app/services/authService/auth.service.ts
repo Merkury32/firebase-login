@@ -15,7 +15,8 @@ export class AuthService {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function () {
+      .then(() => {
+        this.router.navigate(['edit']);
         console.log('Succes');
       })
       .catch(function (error) {
