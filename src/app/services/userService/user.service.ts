@@ -24,8 +24,7 @@ export class UserService {
     //   });
 
     // return result.pipe(take(1));
-    firebase.initializeApp(environment.firebaseConfig);
-    let dbRefObject = firebase
+    firebase
       .database()
       .ref('users')
       .on('value', (snap) => {
