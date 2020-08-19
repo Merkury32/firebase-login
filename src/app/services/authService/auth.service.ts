@@ -17,16 +17,16 @@ export class AuthService {
   ) {}
 
   onLogin(email: string, password: string) {
-    // return this.http.post<UserLogin>(
-    //   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-    //     environment.firebaseConfig.apiKey,
-    //   {
-    //     email: email,
-    //     password: password,
-    //     returnSecureToken: true,
-    //   }
-    // );
-    firebase.auth().signInWithEmailAndPassword(email, password);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.router.navigate(['edit']);
+        console.log('Succes');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   async onLogout() {
