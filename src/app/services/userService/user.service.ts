@@ -24,24 +24,28 @@ export class UserService {
     //   });
 
     // return result.pipe(take(1));
-    firebase
-      .database()
-      .ref('users')
-      .on('value', (snap) => {
-        console.log(snap.val());
-      });
+
+    let users = firebase.database().ref('users');
+
+    users.on('value', (snap) => {
+      let snapVal = snap.val();
+      let usersArr = Object.keys(snapVal).map((id) => new User(snapVal[id]));
+      console.log(usersArr);
+    });
   }
 
   addUser(user: User) {
     let postData: User = user;
     let database = firebase.database();
 
-    database.ref('users/' + '2').set({
+    database.ref('users/' + '3').set({
       firstname: postData.firstname,
       lastname: postData.lastname,
       adress: postData.adress,
       phone: postData.phone,
     });
+
+    this.fetchUsers();
   }
 
   deleteUser() {
