@@ -1,3 +1,15 @@
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -456,20 +468,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function onSubmit(form) {
           var email = form.value.email;
           var password = form.value.password;
-          console.log("Login with email: ".concat(email, " and password: ").concat(password)); // let authObs = this.authService.onLogin(email, password);
-          // authObs.subscribe(
-          //   (resData) => {
-          //     this.isWrongData = false;
-          //     console.log(resData);
-          //     this.router.navigate(['edit']);
-          //     !!this.isWrongData;
-          //   },
-          //   (errorMessage) => {
-          //     this.isWrongData = true;
-          //     console.log(errorMessage);
-          //   }
-          // );
-
+          console.log("Login with email: ".concat(email, " and password: ").concat(password));
           this.authService.onLogin(email, password);
         }
       }]);
@@ -827,7 +826,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function reloadTable() {
           var _this = this;
 
-          //this.userService.fetchUsers();
           this.userService.fetchUsers().subscribe(function (users) {
             _this.users = users;
           });
@@ -845,7 +843,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             lastname: form.value.lastname,
             adress: form.value.adress,
             phone: form.value.phone,
-            id: '0'
+            id: 0
           });
           form.reset();
           this.userService.addUser(user);
@@ -1406,39 +1404,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var firebase_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! firebase/auth */
     "./node_modules/firebase/auth/dist/index.esm.js");
-    /* harmony import */
-
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 
     var UserService = /*#__PURE__*/function () {
-      function UserService(http) {
+      function UserService() {
         _classCallCheck(this, UserService);
 
-        this.http = http;
+        this.usersIds = [];
       }
 
       _createClass(UserService, [{
         key: "fetchUsers",
         value: function fetchUsers() {
-          var result = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"](); // this.http
-          //   .get('https://fir-login-1416c.firebaseio.com/users.json')
-          //   .subscribe((users) => {
-          //     let usersAr = Object.keys(users).map((id) => new User(users[id]));
-          //     result.next(usersAr);
-          //   });
-          // return result.pipe(take(1));
+          var _this3 = this;
 
-          var users = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
-          users.on('value', function (snap) {
+          var result = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+          var usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
+          usersData.on('value', function (snap) {
             var snapVal = snap.val();
             var usersArr = Object.keys(snapVal).map(function (id) {
               return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](snapVal[id]);
             });
+
+            for (var i = 0; i < usersArr.length; i++) {
+              _this3.usersIds.push(usersArr[i].id);
+            }
+
             result.next(usersArr);
           });
+          console.log(Math.max.apply(Math, _toConsumableArray(this.usersIds)));
           return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
         }
       }, {
@@ -1446,11 +1439,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function addUser(user) {
           var postData = user;
           var database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
-          database.ref('users/' + '4').set({
+          console.log('Added user id is:', 2);
+          database.ref('users/' + 2).set({
             firstname: postData.firstname,
             lastname: postData.lastname,
             adress: postData.adress,
-            phone: postData.phone
+            phone: postData.phone,
+            id: 2
           });
           this.fetchUsers();
         }
@@ -1464,7 +1459,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     UserService.ɵfac = function UserService_Factory(t) {
-      return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]));
+      return new (t || UserService)();
     };
 
     UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -1481,9 +1476,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           providedIn: 'root'
         }]
       }], function () {
-        return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]
-        }];
+        return [];
       }, null);
     })();
     /***/

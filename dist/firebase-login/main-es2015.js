@@ -245,19 +245,6 @@ class LoginComponent {
         const email = form.value.email;
         const password = form.value.password;
         console.log(`Login with email: ${email} and password: ${password}`);
-        // let authObs = this.authService.onLogin(email, password);
-        // authObs.subscribe(
-        //   (resData) => {
-        //     this.isWrongData = false;
-        //     console.log(resData);
-        //     this.router.navigate(['edit']);
-        //     !!this.isWrongData;
-        //   },
-        //   (errorMessage) => {
-        //     this.isWrongData = true;
-        //     console.log(errorMessage);
-        //   }
-        // );
         this.authService.onLogin(email, password);
     }
 }
@@ -416,7 +403,6 @@ class UsersEditComponent {
         this.reloadTable();
     }
     reloadTable() {
-        //this.userService.fetchUsers();
         this.userService.fetchUsers().subscribe((users) => {
             this.users = users;
         });
@@ -430,7 +416,7 @@ class UsersEditComponent {
             lastname: form.value.lastname,
             adress: form.value.adress,
             phone: form.value.phone,
-            id: '0',
+            id: 0,
         });
         form.reset();
         this.userService.addUser(user);
@@ -675,8 +661,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/database */ "./node_modules/firebase/database/dist/index.esm.js");
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-
 
 
 
@@ -686,34 +670,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class UserService {
-    constructor(http) {
-        this.http = http;
+    constructor() {
+        this.usersIds = [];
     }
     fetchUsers() {
         let result = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
-        // this.http
-        //   .get('https://fir-login-1416c.firebaseio.com/users.json')
-        //   .subscribe((users) => {
-        //     let usersAr = Object.keys(users).map((id) => new User(users[id]));
-        //     result.next(usersAr);
-        //   });
-        // return result.pipe(take(1));
-        let users = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
-        users.on('value', (snap) => {
-            let snapVal = snap.val();
+        const usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
+        usersData.on('value', (snap) => {
+            const snapVal = snap.val();
             let usersArr = Object.keys(snapVal).map((id) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](snapVal[id]));
+            for (let i = 0; i < usersArr.length; i++) {
+                this.usersIds.push(usersArr[i].id);
+            }
             result.next(usersArr);
         });
+        console.log(Math.max(...this.usersIds));
         return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
     }
     addUser(user) {
-        let postData = user;
-        let database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
-        database.ref('users/' + '4').set({
+        const postData = user;
+        const database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
+        console.log('Added user id is:', 2);
+        database.ref('users/' + 2).set({
             firstname: postData.firstname,
             lastname: postData.lastname,
             adress: postData.adress,
             phone: postData.phone,
+            id: 2,
         });
         this.fetchUsers();
     }
@@ -721,14 +704,14 @@ class UserService {
         // Later
     }
 }
-UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"])); };
+UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(); };
 UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root',
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] }]; }, null); })();
+    }], function () { return []; }, null); })();
 
 
 /***/ }),
