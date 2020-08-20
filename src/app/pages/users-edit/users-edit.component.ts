@@ -26,7 +26,6 @@ export class UsersEditComponent implements OnInit {
   }
 
   reloadTable() {
-    //this.userService.fetchUsers();
     this.userService.fetchUsers().subscribe((users) => {
       this.users = users;
     });
@@ -42,7 +41,7 @@ export class UsersEditComponent implements OnInit {
       lastname: form.value.lastname,
       adress: form.value.adress,
       phone: form.value.phone,
-      id: '0',
+      id: 0,
     });
 
     form.reset();

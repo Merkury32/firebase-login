@@ -3,7 +3,7 @@ export class User {
   lastname: string;
   adress: string;
   phone: string;
-  id: string;
+  id: number;
 
   constructor(user: any) {
     if (user) Object.assign(this, user);
