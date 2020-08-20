@@ -30,15 +30,17 @@ export class UserService {
     users.on('value', (snap) => {
       let snapVal = snap.val();
       let usersArr = Object.keys(snapVal).map((id) => new User(snapVal[id]));
-      console.log(usersArr);
+      result.next(usersArr);
     });
+
+    return result.pipe(take(1));
   }
 
   addUser(user: User) {
     let postData: User = user;
     let database = firebase.database();
 
-    database.ref('users/' + '3').set({
+    database.ref('users/' + '4').set({
       firstname: postData.firstname,
       lastname: postData.lastname,
       adress: postData.adress,

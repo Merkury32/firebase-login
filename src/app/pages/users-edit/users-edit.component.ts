@@ -26,7 +26,10 @@ export class UsersEditComponent implements OnInit {
   }
 
   reloadTable() {
-    this.userService.fetchUsers();
+    //this.userService.fetchUsers();
+    this.userService.fetchUsers().subscribe((users) => {
+      this.users = users;
+    });
   }
 
   toggle(className) {
@@ -41,13 +44,8 @@ export class UsersEditComponent implements OnInit {
       phone: form.value.phone,
       id: '0',
     });
-    // this.userService.addUser(user).subscribe(users => {
-    //   this.reloadTable();
-    // })
-    // form.reset();
-    // this.userService.addUser(user).subscribe((users) => {
-    //   this.users = users;
-    // });
+
+    form.reset();
 
     this.userService.addUser(user);
     this.reloadTable();
