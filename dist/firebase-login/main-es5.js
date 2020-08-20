@@ -825,7 +825,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "reloadTable",
         value: function reloadTable() {
-          this.userService.fetchUsers();
+          var _this = this;
+
+          //this.userService.fetchUsers();
+          this.userService.fetchUsers().subscribe(function (users) {
+            _this.users = users;
+          });
         }
       }, {
         key: "toggle",
@@ -841,14 +846,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             adress: form.value.adress,
             phone: form.value.phone,
             id: '0'
-          }); // this.userService.addUser(user).subscribe(users => {
-          //   this.reloadTable();
-          // })
-          // form.reset();
-          // this.userService.addUser(user).subscribe((users) => {
-          //   this.users = users;
-          // });
-
+          });
+          form.reset();
           this.userService.addUser(user);
           this.reloadTable();
         }
@@ -1175,10 +1174,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AuthService, [{
         key: "onLogin",
         value: function onLogin(email, password) {
-          var _this = this;
+          var _this2 = this;
 
           firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signInWithEmailAndPassword(email, password).then(function () {
-            _this.router.navigate(['edit']);
+            _this2.router.navigate(['edit']);
 
             console.log('Succes');
           })["catch"](function (error) {
@@ -1376,35 +1375,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+    /* harmony import */
+
+
+    var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! src/app/models/user.model */
     "./src/app/models/user.model.ts");
     /* harmony import */
 
 
-    var firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var firebase_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! firebase/app */
     "./node_modules/firebase/app/dist/index.cjs.js");
     /* harmony import */
 
 
-    var firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_3__);
+    var firebase_app__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_4__);
     /* harmony import */
 
 
-    var firebase_database__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var firebase_database__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! firebase/database */
     "./node_modules/firebase/database/dist/index.esm.js");
     /* harmony import */
 
 
-    var firebase_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var firebase_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! firebase/auth */
     "./node_modules/firebase/auth/dist/index.esm.js");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 
@@ -1426,21 +1431,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           //   });
           // return result.pipe(take(1));
 
-          var users = firebase_app__WEBPACK_IMPORTED_MODULE_3__["database"]().ref('users');
+          var users = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
           users.on('value', function (snap) {
             var snapVal = snap.val();
             var usersArr = Object.keys(snapVal).map(function (id) {
-              return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](snapVal[id]);
+              return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](snapVal[id]);
             });
-            console.log(usersArr);
+            result.next(usersArr);
           });
+          return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
         }
       }, {
         key: "addUser",
         value: function addUser(user) {
           var postData = user;
-          var database = firebase_app__WEBPACK_IMPORTED_MODULE_3__["database"]();
-          database.ref('users/' + '3').set({
+          var database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
+          database.ref('users/' + '4').set({
             firstname: postData.firstname,
             lastname: postData.lastname,
             adress: postData.adress,
@@ -1458,7 +1464,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     UserService.ɵfac = function UserService_Factory(t) {
-      return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]));
+      return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]));
     };
 
     UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -1476,7 +1482,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]
         }];
       }, null);
     })();

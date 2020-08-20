@@ -416,7 +416,10 @@ class UsersEditComponent {
         this.reloadTable();
     }
     reloadTable() {
-        this.userService.fetchUsers();
+        //this.userService.fetchUsers();
+        this.userService.fetchUsers().subscribe((users) => {
+            this.users = users;
+        });
     }
     toggle(className) {
         this.userPopup.toggle(className);
@@ -429,13 +432,7 @@ class UsersEditComponent {
             phone: form.value.phone,
             id: '0',
         });
-        // this.userService.addUser(user).subscribe(users => {
-        //   this.reloadTable();
-        // })
-        // form.reset();
-        // this.userService.addUser(user).subscribe((users) => {
-        //   this.users = users;
-        // });
+        form.reset();
         this.userService.addUser(user);
         this.reloadTable();
     }
@@ -672,12 +669,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/user.model */ "./src/app/models/user.model.ts");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/database */ "./node_modules/firebase/database/dist/index.esm.js");
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/models/user.model */ "./src/app/models/user.model.ts");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/database */ "./node_modules/firebase/database/dist/index.esm.js");
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
 
 
 
@@ -699,17 +698,18 @@ class UserService {
         //     result.next(usersAr);
         //   });
         // return result.pipe(take(1));
-        let users = firebase_app__WEBPACK_IMPORTED_MODULE_3__["database"]().ref('users');
+        let users = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
         users.on('value', (snap) => {
             let snapVal = snap.val();
-            let usersArr = Object.keys(snapVal).map((id) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_2__["User"](snapVal[id]));
-            console.log(usersArr);
+            let usersArr = Object.keys(snapVal).map((id) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](snapVal[id]));
+            result.next(usersArr);
         });
+        return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
     }
     addUser(user) {
         let postData = user;
-        let database = firebase_app__WEBPACK_IMPORTED_MODULE_3__["database"]();
-        database.ref('users/' + '3').set({
+        let database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
+        database.ref('users/' + '4').set({
             firstname: postData.firstname,
             lastname: postData.lastname,
             adress: postData.adress,
@@ -721,14 +721,14 @@ class UserService {
         // Later
     }
 }
-UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"])); };
+UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"])); };
 UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root',
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
