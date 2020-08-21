@@ -62,5 +62,11 @@ export class UserService {
     this.fetchUsers();
   }
 
-  deleteUser() {}
+  deleteUser(userId) {
+    console.log('Delete user with id:', userId);
+
+    const usersData = firebase.database().ref(`users/${userId}`);
+
+    usersData.remove();
+  }
 }

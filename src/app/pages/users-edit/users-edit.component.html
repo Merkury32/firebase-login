@@ -25,7 +25,9 @@
           <div class="tableCell">{{ users[i].adress }}</div>
           <div class="tableCell">{{ users[i].phone }}</div>
           <div class="tableCell">
-            <button (click)="onDelete(i)" class="delete-button">X</button>
+            <button (click)="onDelete(users[i].id)" class="delete-button">
+              X
+            </button>
           </div>
         </div>
       </div>

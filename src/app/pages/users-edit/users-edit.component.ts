@@ -50,8 +50,8 @@ export class UsersEditComponent implements OnInit {
     this.reloadTable();
   }
 
-  onDelete(userID: number) {
-    this.userService.deleteUser();
+  onDelete(userId: number) {
+    this.userService.deleteUser(userId);
   }
 
   onClear(form: NgForm) {
