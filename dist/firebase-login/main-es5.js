@@ -1438,8 +1438,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function addUser(user) {
           var postData = user;
           var database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
-          var userId = Math.max.apply(Math, _toConsumableArray(this.usersIds)) + 1;
-          console.log(userId);
+          var userId;
+
+          if (this.usersIds.length === 0) {
+            userId = 0;
+          } else {
+            userId = Math.max.apply(Math, _toConsumableArray(this.usersIds)) + 1;
+          }
+
           console.log('Added user id is:', userId);
           database.ref('users/' + userId).set({
             firstname: postData.firstname,

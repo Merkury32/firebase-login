@@ -689,8 +689,13 @@ class UserService {
     addUser(user) {
         const postData = user;
         const database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
-        let userId = Math.max(...this.usersIds) + 1;
-        console.log(userId);
+        let userId;
+        if (this.usersIds.length === 0) {
+            userId = 0;
+        }
+        else {
+            userId = Math.max(...this.usersIds) + 1;
+        }
         console.log('Added user id is:', userId);
         database.ref('users/' + userId).set({
             firstname: postData.firstname,
