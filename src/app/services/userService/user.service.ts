@@ -36,9 +36,13 @@ export class UserService {
     const postData: User = user;
     const database = firebase.database();
 
-    let userId = Math.max(...this.usersIds) + 1;
+    let userId: number;
 
-    console.log(userId);
+    if (this.usersIds.length === 0) {
+      userId = 0;
+    } else {
+      userId = Math.max(...this.usersIds) + 1;
+    }
 
     console.log('Added user id is:', userId);
 
