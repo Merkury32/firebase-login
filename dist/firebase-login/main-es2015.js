@@ -677,7 +677,10 @@ class UserService {
         let result = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         const usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
         usersData.on('value', (snap) => {
-            const snapVal = snap.val();
+            let snapVal = snap.val();
+            if (snapVal === null) {
+                snapVal = [];
+            }
             let usersArr = Object.keys(snapVal).map((id) => new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](snapVal[id]));
             for (let i = 0; i < usersArr.length; i++) {
                 this.usersIds.push(usersArr[i].id);

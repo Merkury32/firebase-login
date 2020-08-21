@@ -1421,6 +1421,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
           usersData.on('value', function (snap) {
             var snapVal = snap.val();
+
+            if (snapVal === null) {
+              snapVal = [];
+            }
+
             var usersArr = Object.keys(snapVal).map(function (id) {
               return new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](snapVal[id]);
             });
