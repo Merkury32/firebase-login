@@ -684,25 +684,24 @@ class UserService {
             }
             result.next(usersArr);
         });
-        console.log(Math.max(...this.usersIds));
         return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
     }
     addUser(user) {
         const postData = user;
         const database = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]();
-        console.log('Added user id is:', 2);
-        database.ref('users/' + 2).set({
+        let userId = Math.max(...this.usersIds) + 1;
+        console.log(userId);
+        console.log('Added user id is:', userId);
+        database.ref('users/' + userId).set({
             firstname: postData.firstname,
             lastname: postData.lastname,
             adress: postData.adress,
             phone: postData.phone,
-            id: 2,
+            id: userId,
         });
         this.fetchUsers();
     }
-    deleteUser() {
-        // Later
-    }
+    deleteUser() { }
 }
 UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(); };
 UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: 'root' });
