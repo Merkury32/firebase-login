@@ -771,10 +771,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          return ctx_r4.onDelete(i_r3);
+          return ctx_r4.onDelete(ctx_r4.users[i_r3].id);
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "X");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, " X ");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -851,8 +851,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "onDelete",
-        value: function onDelete(userID) {
-          this.userService.deleteUser();
+        value: function onDelete(userId) {
+          this.userService.deleteUser(userId);
         }
       }, {
         key: "onClear",
@@ -1463,7 +1463,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "deleteUser",
-        value: function deleteUser() {}
+        value: function deleteUser(userId) {
+          console.log('Delete user with id:', userId);
+          var usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref("users/".concat(userId));
+          usersData.remove();
+        }
       }]);
 
       return UserService;
