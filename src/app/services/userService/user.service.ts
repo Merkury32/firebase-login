@@ -28,7 +28,6 @@ export class UserService {
       }
       result.next(usersArr);
     });
-    console.log(Math.max(...this.usersIds));
 
     return result.pipe(take(1));
   }
@@ -37,20 +36,22 @@ export class UserService {
     const postData: User = user;
     const database = firebase.database();
 
-    console.log('Added user id is:', 2);
+    let userId = Math.max(...this.usersIds) + 1;
 
-    database.ref('users/' + 2).set({
+    console.log(userId);
+
+    console.log('Added user id is:', userId);
+
+    database.ref('users/' + userId).set({
       firstname: postData.firstname,
       lastname: postData.lastname,
       adress: postData.adress,
       phone: postData.phone,
-      id: 2,
+      id: userId,
     });
 
     this.fetchUsers();
   }
 
-  deleteUser() {
-    // Later
-  }
+  deleteUser() {}
 }
