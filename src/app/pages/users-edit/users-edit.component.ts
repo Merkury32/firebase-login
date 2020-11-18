@@ -46,9 +46,6 @@ export class UsersEditComponent implements OnInit {
       this.reloadTable();
     });
     form.reset();
-
-    this.userService.addUser(user);
-    this.reloadTable();
   }
 
   onDelete(userID: number) {
