@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.onLogin(email, password);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // authObs.subscribe(
     //   (resData) => {
@@ -40,6 +41,8 @@ export class LoginComponent implements OnInit {
     //     console.log(errorMessage);
     //   }
     // );
+=======
+>>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 =======
 >>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
   }

@@ -4,7 +4,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import '@firebase/auth';
+=======
+>>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 =======
 >>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 import * as firebase from 'firebase/app';
@@ -14,11 +17,15 @@ import * as firebase from 'firebase/app';
 })
 export class AuthService {
 <<<<<<< HEAD
+<<<<<<< HEAD
   constructor(
     private http: HttpClient,
     private router: Router,
     private fireAuth: AngularFireAuth
   ) {}
+=======
+  constructor(private router: Router, private fireAuth: AngularFireAuth) {}
+>>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 =======
   constructor(private router: Router, private fireAuth: AngularFireAuth) {}
 >>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
@@ -41,8 +48,13 @@ export class AuthService {
       await firebase.auth().signOut();
       this.router.navigate(['./']);
 <<<<<<< HEAD
+<<<<<<< HEAD
     } catch (e) {
       console.log(e);
+=======
+    } catch (error) {
+      console.log(error);
+>>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 =======
     } catch (error) {
       console.log(error);

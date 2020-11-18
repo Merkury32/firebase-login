@@ -13,7 +13,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthGuardService } from './services/authService/authGuard/auth-guard.service';
 import { environment } from 'src/environments/environment';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 =======
 >>>>>>> 3f34bd7f7ec690fe7f9a6af3f8def7d0d89cdde8
 import * as firebase from 'firebase';
