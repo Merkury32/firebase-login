@@ -469,7 +469,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var email = form.value.email;
           var password = form.value.password;
           console.log("Login with email: ".concat(email, " and password: ").concat(password));
-          this.authService.onLogin(email, password);
+          this.authService.onLogin(email, password); // authObs.subscribe(
+          //   (resData) => {
+          //     this.isWrongData = false;
+          //     console.log(resData);
+          //     this.router.navigate(['edit']);
+          //     !!this.isWrongData;
+          //   },
+          //   (errorMessage) => {
+          //     this.isWrongData = true;
+          //     console.log(errorMessage);
+          //   }
+          // );
         }
       }]);
 
@@ -838,21 +849,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onAdd",
         value: function onAdd(form) {
+          var _this2 = this;
+
           var user = new _models_user_model__WEBPACK_IMPORTED_MODULE_1__["User"]({
             firstname: form.value.firstname,
             lastname: form.value.lastname,
             adress: form.value.adress,
             phone: form.value.phone,
-            id: 0
+            id: '0'
+          });
+          this.userService.addUser(user).subscribe(function (users) {
+            _this2.reloadTable();
           });
           form.reset();
-          this.userService.addUser(user);
-          this.reloadTable();
         }
       }, {
         key: "onDelete",
-        value: function onDelete(userId) {
-          this.userService.deleteUser(userId);
+        value: function onDelete(userID) {
+          var _this3 = this;
+
+          this.userService.deleteUser(userID).subscribe(function (users) {
+            _this3.reloadTable();
+          });
         }
       }, {
         key: "onClear",
@@ -1141,30 +1159,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @firebase/auth */
+    "./node_modules/@firebase/auth/dist/auth.js");
+    /* harmony import */
+
+
+    var _firebase_auth__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_firebase_auth__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
+
+
+    var firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! firebase/app */
     "./node_modules/firebase/app/dist/index.cjs.js");
     /* harmony import */
 
 
-    var firebase_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_2__);
+    var firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_3__);
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/fire/auth */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(router, fireAuth) {
+      function AuthService(http, router, fireAuth) {
         _classCallCheck(this, AuthService);
 
+        this.http = http;
         this.router = router;
         this.fireAuth = fireAuth;
       }
@@ -1172,10 +1207,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AuthService, [{
         key: "onLogin",
         value: function onLogin(email, password) {
-          var _this2 = this;
+          var _this4 = this;
 
-          firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signInWithEmailAndPassword(email, password).then(function () {
-            _this2.router.navigate(['edit']);
+          firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"]().signInWithEmailAndPassword(email, password).then(function () {
+            _this4.router.navigate(['edit']);
 
             console.log('Succes');
           })["catch"](function (error) {
@@ -1192,7 +1227,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     _context.prev = 0;
                     _context.next = 3;
-                    return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signOut();
+                    return firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"]().signOut();
 
                   case 3:
                     this.router.navigate(['./']);
@@ -1218,7 +1253,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AuthService.ɵfac = function AuthService_Factory(t) {
-      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"]));
+      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_fire_auth__WEBPACK_IMPORTED_MODULE_6__["AngularFireAuth"]));
     };
 
     AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
@@ -1236,9 +1271,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]
         }, {
-          type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"]
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
+        }, {
+          type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_6__["AngularFireAuth"]
         }];
       }, null);
     })();
@@ -1415,7 +1452,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UserService, [{
         key: "fetchUsers",
         value: function fetchUsers() {
-          var _this3 = this;
+          var _this5 = this;
 
           var result = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
           var usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref('users');
@@ -1431,12 +1468,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
 
             for (var i = 0; i < usersArr.length; i++) {
-              _this3.usersIds.push(usersArr[i].id);
+              _this5.usersIds.push(usersArr[i].id);
             }
 
             result.next(usersArr);
           });
-          return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
+          return result.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(2));
         }
       }, {
         key: "addUser",
@@ -1451,7 +1488,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             userId = Math.max.apply(Math, _toConsumableArray(this.usersIds)) + 1;
           }
 
-          console.log('Added user id is:', userId);
           database.ref('users/' + userId).set({
             firstname: postData.firstname,
             lastname: postData.lastname,
@@ -1459,14 +1495,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             phone: postData.phone,
             id: userId
           });
-          this.fetchUsers();
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(postData);
         }
       }, {
         key: "deleteUser",
         value: function deleteUser(userId) {
-          console.log('Delete user with id:', userId);
           var usersData = firebase_app__WEBPACK_IMPORTED_MODULE_4__["database"]().ref("users/".concat(userId));
           usersData.remove();
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(usersData);
         }
       }]);
 
