@@ -1,60 +1,73 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { map, max } from 'rxjs/operators';
+import { Subject, of } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
+
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  get allUsers(): User[] {
-    if (localStorage.getItem('users') === null) {
-      return [];
-    } else if (localStorage.length > 0) {
-      let usersArr = JSON.parse(localStorage.getItem('users'));
-      let mapUser = usersArr.map((user) => new User(user));
-      return mapUser;
-    }
-  }
-
-  set allUsers(users: User[]) {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-
   constructor() {}
 
-  fetchUsers() {
-    let usersArr = this.allUsers;
+  usersIds = [];
 
-    return of(usersArr);
+  fetchUsers() {
+    let result = new Subject<User[]>();
+
+    const usersData = firebase.database().ref('users');
+
+    usersData.on('value', (snap) => {
+      let snapVal = snap.val();
+
+      if (snapVal === null) {
+        snapVal = [];
+      }
+
+      let usersArr = Object.keys(snapVal).map((id) => new User(snapVal[id]));
+
+      for (let i = 0; i < usersArr.length; i++) {
+        this.usersIds.push(usersArr[i].id);
+      }
+
+      result.next(usersArr);
+    });
+
+    return result.pipe(take(2));
   }
 
   addUser(user: User) {
-    let usersArr = this.allUsers;
+    const postData: User = user;
 
-    let mapIds = usersArr.map((ids) => ids.id);
+    const database = firebase.database();
 
-    let maxId = Math.max(...mapIds);
+    let userId: number;
 
-    if (usersArr.length == 0) {
-      user.id = 0;
+    if (this.usersIds.length === 0) {
+      userId = 0;
     } else {
-      user.id = maxId + 1;
+      userId = Math.max(...this.usersIds) + 1;
     }
 
-    usersArr.push(user);
+    database.ref('users/' + userId).set({
+      firstname: postData.firstname,
+      lastname: postData.lastname,
+      adress: postData.adress,
+      phone: postData.phone,
+      id: userId,
+    });
 
-    this.allUsers = usersArr;
-
-    return of(user);
+    return of(postData);
   }
 
-  deleteUser(id) {
-    let deletedUser = this.allUsers;
+  deleteUser(userId: number) {
+    const usersData = firebase.database().ref(`users/${userId}`);
 
-    deletedUser.splice(id, 1);
+    usersData.remove();
 
-    this.allUsers = deletedUser;
-
-    return of(deletedUser);
+    return of(usersData);
   }
 }
