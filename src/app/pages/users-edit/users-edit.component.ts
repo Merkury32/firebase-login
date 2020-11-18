@@ -3,7 +3,6 @@ import { UserService } from '../../services/userService/user.service';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
 import { AddUserPopupComponent } from './add-user-popup/add-user-popup.component';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/authService/auth.service';
 
 @Component({
