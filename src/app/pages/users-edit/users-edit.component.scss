@@ -44,6 +44,10 @@
   }
 }
 
+.tableCell__text {
+  margin: 0;
+}
+
 .tableHead {
   color: white;
   background: #327a81;
@@ -57,8 +61,14 @@
   background: #b2dfe2;
   padding: 5px 10px;
   outline: none;
+  border-radius: 5px;
+
   &:active {
-    background: #e2f7f8;
+    background: rgb(166, 207, 209);
+  }
+
+  &:hover {
+    background: rgb(166, 207, 209);
   }
 
   &:hover {

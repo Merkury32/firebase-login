@@ -1,29 +1,39 @@
-<button type="button" class="logout-button" (click)="onLogout()">
-  Wyloguj się
-</button>
+<button type="button" class="logout-button" (click)="onLogout()">Logout</button>
 <div class="table-container">
   <div>
     <button (click)="toggle('.popupBg')" class="add_user-button">
-      Dodaj użytkownika
+      Add user
     </button>
     <div class="table">
       <div class="tableBody">
-        <div class="tableHead">Użytkownicy</div>
-        <div class="tableRow--odd">
-          <div class="tableCell--head">Imię</div>
-          <div class="tableCell--head">Nazwisko</div>
-          <div class="tableCell--head">Adres</div>
-          <div class="tableCell--head">Telefon</div>
+        <div class="tableHead">Users</div>
+        <div class="tableRow tableRow--odd">
+          <div class="tableCell--head">Name</div>
+          <div class="tableCell--head">Surname</div>
+          <div class="tableCell--head">Address</div>
+          <div class="tableCell--head">Phone</div>
           <div class="tableCell--head"></div>
         </div>
         <div
-          [ngClass]="this.i % 2 == 0 ? 'tableRow--even' : 'tableRow--odd'"
+          [ngClass]="
+            this.i % 2 == 0
+              ? 'tableRow tableRow--even'
+              : 'tableRow tableRow--odd'
+          "
           *ngFor="let user of users; let i = index"
         >
-          <div class="tableCell">{{ users[i].firstname }}</div>
-          <div class="tableCell">{{ users[i].lastname }}</div>
-          <div class="tableCell">{{ users[i].adress }}</div>
-          <div class="tableCell">{{ users[i].phone }}</div>
+          <div class="tableCell">
+            <p class="tableCell__text">{{ users[i].firstname }}</p>
+          </div>
+          <div class="tableCell">
+            <p class="tableCell__text">{{ users[i].lastname }}</p>
+          </div>
+          <div class="tableCell">
+            <p class="tableCell__text">{{ users[i].adress }}</p>
+          </div>
+          <div class="tableCell">
+            <p class="tableCell__text">{{ users[i].phone }}</p>
+          </div>
           <div class="tableCell">
             <button (click)="onDelete(users[i].id)" class="delete-button">
               X
@@ -35,7 +45,7 @@
     <add-user-popup>
       <div class="add_user-container" onclick="event.stopPropagation()">
         <form #userEditForm="ngForm" (ngSubmit)="onAdd(userEditForm)">
-          <label for="firstname" class="add_user-label">Imię</label><br />
+          <label for="firstname" class="add_user-label">Name</label><br />
           <input
             type="text"
             name="firstname"
@@ -43,7 +53,7 @@
             ngModel
             class="add_user-input"
           /><br />
-          <label for="lastname" class="add_user-label">Nazwisko</label><br />
+          <label for="lastname" class="add_user-label">Surname</label><br />
           <input
             type="text"
             name="lastname"
@@ -51,7 +61,7 @@
             ngModel
             class="add_user-input"
           /><br />
-          <label for="adress" class="add_user-label">Adres</label><br />
+          <label for="adress" class="add_user-label">Address</label><br />
           <input
             type="text"
             name="adress"
@@ -59,7 +69,7 @@
             ngModel
             class="add_user-input"
           /><br />
-          <label for="phone" class="add_user-label">Numer telefonu</label><br />
+          <label for="phone" class="add_user-label">Phone</label><br />
           <input
             type="text"
             name="phone"
