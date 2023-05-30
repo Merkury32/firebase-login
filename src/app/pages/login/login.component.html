@@ -1,27 +1,37 @@
 <div class="login-container">
   <div class="form-container">
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-      <p class="wrong-auth-text" *ngIf="isWrongData === true">
-        Podałeś zły login lub hasło
+    <h3 class="form-header">Login</h3>
+    <form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <div class="form-element">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          ngModel
+          class="email-input"
+        />
+        <label for="email" class="email-label">E-mail (test@test.pl)</label>
+      </div>
+
+      <div class="form-element">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          ngModel
+          class="password-input"
+        />
+        <label for="password" class="password-label">Password (test123)</label>
+      </div>
+
+      <p
+        class="wrong-auth-text"
+        [ngStyle]="{ visibility: invalidAuthMessage ? 'visible' : 'hidden' }"
+      >
+        {{ invalidAuthMessage }}
       </p>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        ngModel
-        class="email-input"
-      /><br />
-      <label for="email" class="email-label">E-mail</label><br />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        ngModel
-        class="password-input"
-      />
-      <i class="fas fa-eye-slash"></i><br />
-      <label for="password" class="password-label">Hasło</label><br />
-      <button type="submit" class="login-button">Zaloguj się</button>
+
+      <button type="submit" class="login-button">Login</button>
     </form>
   </div>
 </div>

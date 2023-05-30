@@ -10,7 +10,6 @@ import { AddUserPopupComponent } from './pages/users-edit/add-user-popup/add-use
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AuthGuardService } from './services/authService/authGuard/auth-guard.service';
 import { environment } from 'src/environments/environment';
 
 import * as firebase from 'firebase';
@@ -32,7 +31,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [AuthGuardService, LoginComponent],
+  providers: [LoginComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

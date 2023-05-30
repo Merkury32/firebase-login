@@ -3,9 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/authService/auth.service';
 import { User } from 'src/app/models/user.model';
-import { Observable } from 'rxjs';
-import { UserLogin } from 'src/app/models/user-login.model';
-import { AuthGuardService } from 'src/app/services/authService/authGuard/auth-guard.service';
 
 @Component({
   selector: 'login',
@@ -14,7 +11,7 @@ import { AuthGuardService } from 'src/app/services/authService/authGuard/auth-gu
 })
 export class LoginComponent implements OnInit {
   user: User[];
-  isWrongData: boolean;
+  invalidAuthMessage: string | null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -25,19 +22,10 @@ export class LoginComponent implements OnInit {
 
     console.log(`Login with email: ${email} and password: ${password}`);
 
-    this.authService.onLogin(email, password);
-
-    // authObs.subscribe(
-    //   (resData) => {
-    //     this.isWrongData = false;
-    //     console.log(resData);
-    //     this.router.navigate(['edit']);
-    //     !!this.isWrongData;
-    //   },
-    //   (errorMessage) => {
-    //     this.isWrongData = true;
-    //     console.log(errorMessage);
-    //   }
-    // );
+    this.authService.onLogin(email, password).subscribe((res: any) => {
+      if (res) {
+        this.invalidAuthMessage = res.message;
+      }
+    });
   }
 }
