@@ -18,11 +18,11 @@
 
     exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\nbody {\n  font-family: \"Roboto\", sans-serif;\n  margin: 0;\n  background: #91ced4;\n}", "", {
       "version": 3,
-      "sources": ["P:\\projekty\\firebase-login/src\\styles.scss", "styles.scss"],
+      "sources": ["C:\\work\\projects\\firebase-login/src\\styles.scss", "styles.scss"],
       "names": [],
       "mappings": "AAAA,8EAAA;AAEA;EACE,iCAAA;EACA,SAAA;EACA,mBAAA;ACAF",
       "file": "styles.scss",
-      "sourcesContent": ["/* You can add global styles to this file, and also import other style files */\n\nbody {\n  font-family: 'Roboto', sans-serif;\n  margin: 0;\n  background: #91ced4;\n}\n", "/* You can add global styles to this file, and also import other style files */\nbody {\n  font-family: \"Roboto\", sans-serif;\n  margin: 0;\n  background: #91ced4;\n}"]
+      "sourcesContent": ["/* You can add global styles to this file, and also import other style files */\r\n\r\nbody {\r\n  font-family: 'Roboto', sans-serif;\r\n  margin: 0;\r\n  background: #91ced4;\r\n}\r\n", "/* You can add global styles to this file, and also import other style files */\nbody {\n  font-family: \"Roboto\", sans-serif;\n  margin: 0;\n  background: #91ced4;\n}"]
     }]); // Exports
 
     module.exports = exports;
@@ -464,7 +464,7 @@
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! P:\projekty\firebase-login\src\styles.scss */
+    /*! C:\work\projects\firebase-login\src\styles.scss */
     "./src/styles.scss");
     /***/
   }
